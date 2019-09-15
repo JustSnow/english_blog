@@ -2,3 +2,14 @@ extends ../layouts/layout
 
 block content
   h1 new
+  form(method='POST' action='users')
+    label First name
+    input(type='text' name='first_name')
+      
+    label Last name
+    input(type='text' name='last_name')
+      
+    label email
+    input(type='text' name='email')
+      
+    button(type='submit') Save
