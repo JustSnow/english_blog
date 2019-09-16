@@ -3,7 +3,6 @@ extends ../layouts/layout
 block content
   h1 #{user.firstname}
   p 
-    last name: 
+    | last name: 
     span #{user.lastname}
-  p
-    email: #{user.email}
+  p email: !{user.email}

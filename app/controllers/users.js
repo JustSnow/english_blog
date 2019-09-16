@@ -28,32 +28,25 @@ class UsersController {
     if (!Number(id)) { done() }
 
     try {
-      const user = await db.User.findByPk(id)
-
-      if (user) {
-        res.render('users/show', { user: user })
-      } else {
-        done()
-      }
+      db.User.findByPk(id).then(user => {
+        res.render('users/show', { user: user.get() })
+      }).catch(error => { done(error) })
     } catch (error) {
       done(error)
     }
   }
 
-  // TODO: add params permit and validation
-  // https://github.com/hapijs/joi
-  // https://www.npmjs.com/package/express-validate-schema
   static async create(req, res) {
     let done = finalhandler(req, res)
     const params = req.body
 
     try {
-      const user = db.User.create(params)
-      if (user) {
-        res.render('users/show', { user: user })
-      } else {
+      db.User.create(params).then(user => {
+        res.redirect(`/users/${user.id}`)
+      }).catch(error => {
+        console.log('error: ', error);
         res.render('users/new', { params: params })
-      }
+      })
     } catch(error) { done(error) }
   }
 
@@ -65,6 +58,7 @@ class UsersController {
 
   }
 
+  // TODO fix undefined static method
   static permittedParams() {
     Joi.object().keys({
       first_name: Joi.string(),
