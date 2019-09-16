@@ -1,5 +1,6 @@
 import finalhandler from 'finalhandler'
 import db from '../models'
+import Joi from 'joi'
 
 class UsersController {
   static async index(req, res) {
@@ -13,6 +14,8 @@ class UsersController {
     }
   }
 
+  // TODO: add info about request to log
+  // solve problem with static method permittedParams
   static async new(req, res) {
     res.render('users/new')
   }
@@ -60,6 +63,14 @@ class UsersController {
 
   static async delete(res, req) {
 
+  }
+
+  static permittedParams() {
+    Joi.object().keys({
+      first_name: Joi.string(),
+      last_name: Joi.string(),
+      email: Joi.string()
+    })
   }
 }
 

@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import UsersController from '../controllers/users'
+import ValidateSchema from 'express-validate-schema'
 
 const router = Router()
 
@@ -7,7 +8,7 @@ router.get('/new', UsersController.new)
 
 router.route('/')
   .get(UsersController.index)
-  .post(UsersController.create)
+  .post(ValidateSchema().params(UsersController.permittedParams()), UsersController.create)
   .put(UsersController.update)
 
 router.route('/:id(\\d+)')
