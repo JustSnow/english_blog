@@ -3,6 +3,8 @@ import express from 'express'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import methodOverride from 'method-override'
+import morganBody from 'morgan-body'
 
 import indexRouter from './app/routes/index'
 import usersRouter from './app/routes/users'
@@ -13,11 +15,15 @@ const app = express()
 app.set('views', path.join(__dirname, 'app/views'))
 app.set('view engine', 'pug')
 
-app.use(logger('dev'))
+app.use(logger('common'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+// TODO fix me for delete and put methods
+app.use(methodOverride('_method'))
+
+morganBody(app)
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)

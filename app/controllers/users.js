@@ -51,11 +51,34 @@ class UsersController {
   }
 
   static async update(res, req) {
+    let done = finalhandler(req, res)
+    const { id } = req.params
+    const params = req.body
 
+    try {
+      db.User.findByPk(id).then(user => {
+        user.update(params).then(user => {
+          res.redirect(`/users/${user.id}`)
+        }).catch(error => {
+          let backURL = req.header('Referer') || `/users/${user.id}`
+          console.log('error: ', error);
+          res.redirect(backURL)
+        })
+      })
+    } catch(error) { done(error) }
   }
 
   static async delete(res, req) {
+    let done = finalhandler(req, res)
+    const { id } = req.req.params
 
+    try {
+      db.User.findByPk(id).then(user => {
+        user.destroy({ force: true }).then(user => {
+          res.redirect('/users')
+        }).catch(error => { done(error) })
+      }).catch(error => { done(error) })
+    } catch(error) { done(error) }
   }
 
   // TODO fix undefined static method
