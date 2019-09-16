@@ -7,15 +7,12 @@ class UsersController {
     let done = finalhandler(req, res)
 
     try {
-      const users = await db.User.findAll()
-      res.render('users/index', { users: users })
-    } catch (error) {
-      done(error)
-    }
+      db.User.findAll().then(users => {
+        res.render('users/index', { users: users })
+      }).catch(error => { done(error) })
+    } catch (error) { done(error) }
   }
 
-  // TODO: add info about request to log
-  // solve problem with static method permittedParams
   static async new(req, res) {
     res.render('users/new')
   }
@@ -50,7 +47,7 @@ class UsersController {
     } catch(error) { done(error) }
   }
 
-  static async update(res, req) {
+  static async update(req, res) {
     let done = finalhandler(req, res)
     const { id } = req.params
     const params = req.body
@@ -68,9 +65,9 @@ class UsersController {
     } catch(error) { done(error) }
   }
 
-  static async delete(res, req) {
+  static async delete(req, res) {
     let done = finalhandler(req, res)
-    const { id } = req.req.params
+    const { id } = req.params
 
     try {
       db.User.findByPk(id).then(user => {
@@ -81,9 +78,8 @@ class UsersController {
     } catch(error) { done(error) }
   }
 
-  // TODO fix undefined static method
   static permittedParams() {
-    Joi.object().keys({
+    return Joi.object().keys({
       first_name: Joi.string(),
       last_name: Joi.string(),
       email: Joi.string()
