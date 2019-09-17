@@ -22,7 +22,7 @@ class UsersController {
     const { id } = req.params
 
     // TODO: doesn't work properly
-    if (!Number(id)) { done() }
+    if (!Number(id)) { return done() }
 
     try {
       db.User.findByPk(id).then(user => {

@@ -6,8 +6,8 @@ block content
     ul
       each user in users
         li
-          p= user.firstname
-          p= user.lastname
+          p= user.firstName
+          p= user.lastName
           p= user.email
           form(method='POST' action=`/users/${user.id}`)
             input(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')") 
