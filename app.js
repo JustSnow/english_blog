@@ -9,6 +9,7 @@ import morganBody from 'morgan-body'
 import indexRouter from './app/routes/index'
 import usersRouter from './app/routes/users'
 import contentCategoriesRouter from './app/routes/content_categories'
+import contentsRouter from './app/routes/contents'
 
 const app = express()
 
@@ -35,6 +36,7 @@ morganBody(app, { logResponseBody: false })
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/content-categories', contentCategoriesRouter)
+app.use('/contents', contentsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>

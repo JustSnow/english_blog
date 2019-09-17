@@ -1,0 +1,15 @@
+extends ../layouts/layout
+
+block content
+  h1 Contents
+  if contents
+    ul
+      each content in contents
+        li
+          p= content.title
+          p= content.alias
+          p= content.description
+          p Show content categories select
+          form(method='POST' action=`/contents/${content.id}`)
+            input(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')") 
+            input(type='hidden' name='_method' value='DELETE')
