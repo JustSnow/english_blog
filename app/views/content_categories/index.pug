@@ -1,0 +1,14 @@
+extends ../layouts/layout
+
+block content
+  h1 Content Categories
+  if contentCategories
+    ul
+      each contentCategory in contentCategories
+        li
+          p= contentCategory.title
+          p= contentCategory.alias
+          p= contentCategory.description
+          form(method='POST' action=`/contentCategories/${contentCategory.id}`)
+            input(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')") 
+            input(type='hidden' name='_method' value='DELETE')

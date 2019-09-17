@@ -1,0 +1,15 @@
+extends ../layouts/layout
+
+block content
+  h1 New content category
+  form(method='POST' action='/content-categories')
+    label Title
+    input(type='text' name='title')
+      
+    label Alias
+    input(type='text' name='alias')
+      
+    label Description
+    input(type='text' name='description')
+      
+    button(type='submit') Save
