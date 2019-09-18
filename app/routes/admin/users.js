@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import UsersController from '../controllers/users'
+import UsersController from '../../controllers/admin/users'
 import ValidateSchema from 'express-validate-schema'
 
 const router = Router()

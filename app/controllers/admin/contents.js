@@ -1,21 +1,23 @@
 import finalhandler from 'finalhandler'
-import db from '../models'
+import db from '../../models'
 import Joi from 'joi'
 
 // TODO refactor me add dry with General CRUD class
-class ContentCategoriesController {
+class ContentsController {
   static async index(req, res) {
     let done = finalhandler(req, res)
 
     try {
-      db.ContentCategory.findAll().then(contentCategories => {
-        res.render('content_categories/index', { contentCategories: contentCategories })
+      // TODO read about assosiations
+      // SequelizeDatabaseError: column "ContentCategoryId" does not exist
+      db.Content.findAll().then(contents => {
+        res.render('admin/contents/index', { contents: contents })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
   }
 
   static async new(req, res) {
-    res.render('content_categories/new')
+    res.render('admin/contents/new')
   }
 
   static async show(req, res) {
@@ -25,8 +27,8 @@ class ContentCategoriesController {
     if (!Number(id)) { return done() }
 
     try {
-      db.ContentCategory.findByPk(id).then(contentCategory => {
-        res.render('content_categories/show', { contentCategory: contentCategory.get() })
+      db.Content.findByPk(id).then(content => {
+        res.render('admin/contents/show', { content: content.get() })
       }).catch(error => { done(error) })
     } catch (error) {
       done(error)
@@ -38,11 +40,11 @@ class ContentCategoriesController {
     const params = req.body
 
     try {
-      db.ContentCategory.create(params).then(contentCategory => {
-        res.redirect(`/content-categories/${contentCategory.id}`)
+      db.Content.create(params).then(content => {
+        res.redirect(`/admin/contents/${content.id}`)
       }).catch(error => {
         console.log('error: ', error);
-        res.render('content_categories/new', { params: params })
+        res.render('admin/contents/new', { params: params })
       })
     } catch(error) { done(error) }
   }
@@ -53,11 +55,11 @@ class ContentCategoriesController {
     const params = req.body
 
     try {
-      db.ContentCategory.findByPk(id).then(contentCategory => {
-        contentCategory.update(params).then(contentCategory => {
-          res.redirect(`/content-categories/${contentCategory.id}`)
+      db.Content.findByPk(id).then(content => {
+        content.update(params).then(content => {
+          res.redirect(`/admin/contents/${content.id}`)
         }).catch(error => {
-          let backURL = req.header('Referer') || `/content-categories/${contentCategory.id}`
+          let backURL = req.header('Referer') || `/admin/contents/${content.id}`
           console.log('error: ', error);
           res.redirect(backURL)
         })
@@ -70,9 +72,9 @@ class ContentCategoriesController {
     const { id } = req.params
 
     try {
-      db.ContentCategory.findByPk(id).then(contentCategory => {
-        contentCategory.destroy({ force: true }).then(contentCategory => {
-          res.redirect('/content-categories')
+      db.Content.findByPk(id).then(content => {
+        content.destroy({ force: true }).then(content => {
+          res.redirect('/admin/contents')
         }).catch(error => { done(error) })
       }).catch(error => { done(error) })
     } catch(error) { done(error) }
@@ -82,9 +84,10 @@ class ContentCategoriesController {
     return Joi.object().keys({
       title: Joi.string(),
       alias: Joi.string(),
-      description: Joi.string()
+      description: Joi.string(),
+      contentCategoryId: Joi.number().integer()
     })
   }
 }
 
-export default ContentCategoriesController
+export default ContentsController

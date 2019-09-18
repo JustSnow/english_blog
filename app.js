@@ -6,10 +6,8 @@ import logger from 'morgan'
 import methodOverride from 'method-override'
 import morganBody from 'morgan-body'
 
+import adminRouter from './app/routes/admin/index'
 import indexRouter from './app/routes/index'
-import usersRouter from './app/routes/users'
-import contentCategoriesRouter from './app/routes/content_categories'
-import contentsRouter from './app/routes/contents'
 
 const app = express()
 
@@ -34,9 +32,7 @@ app.use(methodOverride((req, res) => {
 morganBody(app, { logResponseBody: false })
 
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
-app.use('/content-categories', contentCategoriesRouter)
-app.use('/contents', contentsRouter)
+app.use('/admin', adminRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>

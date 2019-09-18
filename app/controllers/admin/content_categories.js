@@ -1,32 +1,32 @@
 import finalhandler from 'finalhandler'
-import db from '../models'
+import db from '../../models'
 import Joi from 'joi'
 
-class UsersController {
+// TODO refactor me add dry with General CRUD class
+class ContentCategoriesController {
   static async index(req, res) {
     let done = finalhandler(req, res)
 
     try {
-      db.User.findAll().then(users => {
-        res.render('users/index', { users: users })
+      db.ContentCategory.findAll().then(contentCategories => {
+        res.render('admin/content_categories/index', { contentCategories: contentCategories })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
   }
 
   static async new(req, res) {
-    res.render('users/new')
+    res.render('admin/content_categories/new')
   }
 
   static async show(req, res) {
     let done = finalhandler(req, res)
     const { id } = req.params
 
-    // TODO: doesn't work properly
     if (!Number(id)) { return done() }
 
     try {
-      db.User.findByPk(id).then(user => {
-        res.render('users/show', { user: user.get() })
+      db.ContentCategory.findByPk(id).then(contentCategory => {
+        res.render('admin/content_categories/show', { contentCategory: contentCategory.get() })
       }).catch(error => { done(error) })
     } catch (error) {
       done(error)
@@ -38,11 +38,11 @@ class UsersController {
     const params = req.body
 
     try {
-      db.User.create(params).then(user => {
-        res.redirect(`/users/${user.id}`)
+      db.ContentCategory.create(params).then(contentCategory => {
+        res.redirect(`/admin/content-categories/${contentCategory.id}`)
       }).catch(error => {
         console.log('error: ', error);
-        res.render('users/new', { params: params })
+        res.render('admin/content_categories/new', { params: params })
       })
     } catch(error) { done(error) }
   }
@@ -53,11 +53,11 @@ class UsersController {
     const params = req.body
 
     try {
-      db.User.findByPk(id).then(user => {
-        user.update(params).then(user => {
-          res.redirect(`/users/${user.id}`)
+      db.ContentCategory.findByPk(id).then(contentCategory => {
+        contentCategory.update(params).then(contentCategory => {
+          res.redirect(`/admin/content-categories/${contentCategory.id}`)
         }).catch(error => {
-          let backURL = req.header('Referer') || `/users/${user.id}`
+          let backURL = req.header('Referer') || `/admin/content-categories/${contentCategory.id}`
           console.log('error: ', error);
           res.redirect(backURL)
         })
@@ -70,9 +70,9 @@ class UsersController {
     const { id } = req.params
 
     try {
-      db.User.findByPk(id).then(user => {
-        user.destroy({ force: true }).then(user => {
-          res.redirect('/users')
+      db.ContentCategory.findByPk(id).then(contentCategory => {
+        contentCategory.destroy({ force: true }).then(contentCategory => {
+          res.redirect('/admin/content-categories')
         }).catch(error => { done(error) })
       }).catch(error => { done(error) })
     } catch(error) { done(error) }
@@ -80,11 +80,11 @@ class UsersController {
 
   static permittedParams() {
     return Joi.object().keys({
-      first_name: Joi.string(),
-      last_name: Joi.string(),
-      email: Joi.string()
+      title: Joi.string(),
+      alias: Joi.string(),
+      description: Joi.string()
     })
   }
 }
 
-export default UsersController
+export default ContentCategoriesController
