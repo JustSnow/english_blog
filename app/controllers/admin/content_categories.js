@@ -8,7 +8,7 @@ class ContentCategoriesController {
     let done = finalhandler(req, res)
 
     try {
-      db.ContentCategory.findAll().then(contentCategories => {
+      db.contentCategory.findAll().then(contentCategories => {
         res.render('admin/content_categories/index', { contentCategories: contentCategories })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
@@ -25,7 +25,7 @@ class ContentCategoriesController {
     if (!Number(id)) { return done() }
 
     try {
-      db.ContentCategory.findByPk(id).then(contentCategory => {
+      db.contentCategory.findByPk(id).then(contentCategory => {
         res.render('admin/content_categories/show', { contentCategory: contentCategory.get() })
       }).catch(error => { done(error) })
     } catch (error) {
@@ -38,7 +38,7 @@ class ContentCategoriesController {
     const params = req.body
 
     try {
-      db.ContentCategory.create(params).then(contentCategory => {
+      db.contentCategory.create(params).then(contentCategory => {
         res.redirect(`/admin/content-categories/${contentCategory.id}`)
       }).catch(error => {
         console.log('error: ', error);
@@ -53,7 +53,7 @@ class ContentCategoriesController {
     const params = req.body
 
     try {
-      db.ContentCategory.findByPk(id).then(contentCategory => {
+      db.contentCategory.findByPk(id).then(contentCategory => {
         contentCategory.update(params).then(contentCategory => {
           res.redirect(`/admin/content-categories/${contentCategory.id}`)
         }).catch(error => {
@@ -70,7 +70,7 @@ class ContentCategoriesController {
     const { id } = req.params
 
     try {
-      db.ContentCategory.findByPk(id).then(contentCategory => {
+      db.contentCategory.findByPk(id).then(contentCategory => {
         contentCategory.destroy({ force: true }).then(contentCategory => {
           res.redirect('/admin/content-categories')
         }).catch(error => { done(error) })

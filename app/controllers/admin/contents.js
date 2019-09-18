@@ -10,7 +10,7 @@ class ContentsController {
     try {
       // TODO read about assosiations
       // SequelizeDatabaseError: column "ContentCategoryId" does not exist
-      db.Content.findAll().then(contents => {
+      db.content.findAll().then(contents => {
         res.render('admin/contents/index', { contents: contents })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
@@ -27,7 +27,7 @@ class ContentsController {
     if (!Number(id)) { return done() }
 
     try {
-      db.Content.findByPk(id).then(content => {
+      db.content.findByPk(id).then(content => {
         res.render('admin/contents/show', { content: content.get() })
       }).catch(error => { done(error) })
     } catch (error) {
@@ -40,7 +40,7 @@ class ContentsController {
     const params = req.body
 
     try {
-      db.Content.create(params).then(content => {
+      db.content.create(params).then(content => {
         res.redirect(`/admin/contents/${content.id}`)
       }).catch(error => {
         console.log('error: ', error);
@@ -55,7 +55,7 @@ class ContentsController {
     const params = req.body
 
     try {
-      db.Content.findByPk(id).then(content => {
+      db.content.findByPk(id).then(content => {
         content.update(params).then(content => {
           res.redirect(`/admin/contents/${content.id}`)
         }).catch(error => {
@@ -72,7 +72,7 @@ class ContentsController {
     const { id } = req.params
 
     try {
-      db.Content.findByPk(id).then(content => {
+      db.content.findByPk(id).then(content => {
         content.destroy({ force: true }).then(content => {
           res.redirect('/admin/contents')
         }).catch(error => { done(error) })
@@ -84,8 +84,7 @@ class ContentsController {
     return Joi.object().keys({
       title: Joi.string(),
       alias: Joi.string(),
-      description: Joi.string(),
-      contentCategoryId: Joi.number().integer()
+      description: Joi.string()
     })
   }
 }

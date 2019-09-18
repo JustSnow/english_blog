@@ -1,13 +1,14 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const ContentCategory = sequelize.define('ContentCategory', {
+  const contentCategory = sequelize.define('contentCategory', {
     title: DataTypes.STRING,
     alias: DataTypes.STRING,
     description: DataTypes.TEXT
   }, {});
-  ContentCategory.associate = function(models) {
-    ContentCategory.hasMany(models.Content, { as: 'contents' })
+  contentCategory.associate = function(models) {
+    contentCategory.hasMany(models.content, { as: 'contents' })
+    contentCategory.belongsTo(models.user, { as: 'user' })
   };
-  return ContentCategory;
+  return contentCategory;
 };

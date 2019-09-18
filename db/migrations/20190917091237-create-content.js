@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Contents', {
+    return queryInterface.createTable('contents', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,13 +17,18 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        }
+      },
       contentCategoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: {
-            tableName: 'ContentCategories'
-          },
+          model: 'contentCategories',
           key: 'id'
         }
       },
@@ -36,10 +41,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     }).then(() => {
-      queryInterface.addIndex('Contents', ['contentCategoryId'])
+      queryInterface.addIndex('contents', ['contentCategoryId'])
     })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Contents');
+    return queryInterface.dropTable('contents');
   }
 };

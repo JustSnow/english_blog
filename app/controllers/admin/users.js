@@ -7,7 +7,7 @@ class UsersController {
     let done = finalhandler(req, res)
 
     try {
-      db.User.findAll().then(users => {
+      db.user.findAll().then(users => {
         res.render('admin/users/index', { users: users })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
@@ -25,7 +25,7 @@ class UsersController {
     if (!Number(id)) { return done() }
 
     try {
-      db.User.findByPk(id).then(user => {
+      db.user.findByPk(id).then(user => {
         res.render('admin/users/show', { user: user.get() })
       }).catch(error => { done(error) })
     } catch (error) {
@@ -38,7 +38,7 @@ class UsersController {
     const params = req.body
 
     try {
-      db.User.create(params).then(user => {
+      db.user.create(params).then(user => {
         res.redirect(`/admin/users/${user.id}`)
       }).catch(error => {
         console.log('error: ', error);
@@ -53,7 +53,7 @@ class UsersController {
     const params = req.body
 
     try {
-      db.User.findByPk(id).then(user => {
+      db.user.findByPk(id).then(user => {
         user.update(params).then(user => {
           res.redirect(`/admin/users/${user.id}`)
         }).catch(error => {
@@ -70,7 +70,7 @@ class UsersController {
     const { id } = req.params
 
     try {
-      db.User.findByPk(id).then(user => {
+      db.user.findByPk(id).then(user => {
         user.destroy({ force: true }).then(user => {
           res.redirect('/admin/users')
         }).catch(error => { done(error) })
