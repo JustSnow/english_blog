@@ -8,6 +8,7 @@ class UsersController {
 
     try {
       db.user.findAll().then(users => {
+        console.log('users: ', users);
         res.render('admin/users/index', { users: users })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
