@@ -1,4 +1,5 @@
 import factory, { SequelizeAdapter } from 'factory-girl'
+import app from '../../app'
 
 const adapter = new SequelizeAdapter()
 const Models = require('../../app/models')
@@ -25,5 +26,6 @@ beforeEach((done) => {
 
 module.exports = {
   factory: factory,
-  Models: Models
+  Models: Models,
+  app: app
 }

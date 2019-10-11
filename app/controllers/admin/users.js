@@ -77,8 +77,8 @@ class UsersController {
 
   static permittedParams() {
     return Joi.object().keys({
-      first_name: Joi.string(),
-      last_name: Joi.string(),
+      firstName: Joi.string(),
+      lastName: Joi.string(),
       email: Joi.string()
     })
   }
