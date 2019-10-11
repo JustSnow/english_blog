@@ -1,3 +1,4 @@
+// try to use here path.relative
 const mochaHelper = require('../../../support')
 
 import chai from 'chai'
