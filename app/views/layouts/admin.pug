@@ -4,6 +4,22 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/admin.css')
   body
-    block content
+    div(class='h-admin-page')
+      nav(class='l-admin-page-navigation navbar navbar-expand-lg navbar-light bg-light')
+        button(class='navbar-toggler' type='button' data-toggle='collapse' data-target='#b-admin-page-navigation', aria-controls='b-admin-page-navigation')
+          span(class='navbar-toggler-icon')
+            
+        div(class='collapse navbar-collapse' id='b-admin-page-navigation')
+          ul(class='navbar-nav mr-auto')
+            li(class='nav-item active')
+              a(class='nav-link' href='#')
+                | Home 
+                span(class='sr-only') (current)
+                  
+            li(class='nav-item')
+              a(class='nav-link' href='#') Content Categories
+        
+      main(class='l-admin-page-content')
+        block content
 
   script(src='/javascripts/admin.js')
