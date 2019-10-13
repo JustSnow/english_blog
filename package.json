@@ -15,10 +15,12 @@
     "express-validate-schema": "^2.2.0",
     "finalhandler": "^1.1.2",
     "http-errors": "^1.7.3",
+    "jquery": "^3.4.1",
     "method-override": "^3.0.0",
     "morgan": "~1.9.1",
     "morgan-body": "^2.4.7",
     "pg": "^7.12.1",
+    "popper.js": "^1.15.0",
     "pug": "^2.0.4",
     "sequelize": "^5.18.4",
     "sequelize-cli": "^5.5.1"

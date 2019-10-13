@@ -4,18 +4,24 @@
 
 @import '~bootstrap/scss/mixins'
 
+@import '~bootstrap/scss/reboot'
+@import '~bootstrap/scss/utilities'
+@import '~bootstrap/scss/transitions'
+
 @import '~bootstrap/scss/buttons'
 @import '~bootstrap/scss/button-group'
 @import '~bootstrap/scss/dropdown'
 @import '~bootstrap/scss/forms'
-@import '~bootstrap/scss/grid'
 @import '~bootstrap/scss/input-group'
 @import '~bootstrap/scss/nav'
 @import '~bootstrap/scss/navbar'
 
-// TODO add normalize.css
-
 .h-admin-page
-  border: 1px solid black
   +make-container
-  width: 960px
+
+  .h-admin-page-navigation
+    +make-row
+
+  .l-admin-page-content, .l-admin-page-navigation
+    +make-container
+    +make-container-max-widths((xl: 960px))
