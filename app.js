@@ -9,11 +9,18 @@ import morganBody from 'morgan-body'
 import adminRouter from './app/routes/admin/index'
 import indexRouter from './app/routes/index'
 
+import AdminRoutes from './app/routes/admin/helper'
+
 const app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'))
 app.set('view engine', 'pug')
+
+app.use((req, res, next) => {
+  res.locals.adminRoutes = AdminRoutes
+  next();
+})
 
 app.use(logger('common'))
 app.use(express.json())

@@ -15,10 +15,10 @@ html
           .collapse.navbar-collapse#b-admin-page-navigation
             ul.navbar-nav.mr-auto
               li.nav-item.active
-                a.nav-link(href='/admin/content-categories') Content Categories
+                a.nav-link(href=`${adminRoutes.contentCategoriesPath()}`) Content Categories
                     
               li.nav-item
-                a.nav-link(href='/admin/contents') Contents
+                a.nav-link(href=`${adminRoutes.contentsPath()}`) Contents
         
       main.l-admin-page-content
         block content
