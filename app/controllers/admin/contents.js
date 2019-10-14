@@ -1,6 +1,7 @@
 import finalhandler from 'finalhandler'
 import db from '../../models'
 import Joi from 'joi'
+import AdminRoutes from '../../routes/admin/helper'
 
 // TODO refactor me add dry with General CRUD class
 class ContentsController {
@@ -17,18 +18,28 @@ class ContentsController {
   }
 
   static async new(req, res) {
-    res.render('admin/contents/new')
+    let contentCategories = db.contentCategory.findAll({ attributes: ['id', 'title'] })
+
+    Promise.all([contentCategories]).then(responses => {
+      res.render('admin/contents/new', { contentCategories: responses[0] })
+    }).catch(error => { done(error) })
   }
 
-  static async show(req, res) {
+  static async edit(req, res) {
     let done = finalhandler(req, res)
     const { id } = req.params
 
     if (!Number(id)) { return done() }
 
     try {
-      db.content.findByPk(id).then(content => {
-        res.render('admin/contents/show', { content: content.get() })
+      let content = db.content.findByPk(id)
+      let contentCategories = db.contentCategory.findAll({ attributes: ['id', 'title'] })
+
+      Promise.all([
+        content,
+        contentCategories
+      ]).then(responses => {
+        res.render('admin/contents/edit', { content: responses[0].get(), contentCategories: responses[1] })
       }).catch(error => { done(error) })
     } catch (error) {
       done(error)
@@ -41,7 +52,7 @@ class ContentsController {
 
     try {
       db.content.create(params).then(content => {
-        res.redirect(`/admin/contents/${content.id}`)
+        res.redirect(AdminRoutes.editContentPath(content.id))
       }).catch(error => {
         console.log('error: ', error);
         res.render('admin/contents/new', { params: params })
@@ -57,9 +68,9 @@ class ContentsController {
     try {
       db.content.findByPk(id).then(content => {
         content.update(params).then(content => {
-          res.redirect(`/admin/contents/${content.id}`)
+          res.redirect(AdminRoutes.editContentPath(content.id))
         }).catch(error => {
-          let backURL = req.header('Referer') || `/admin/contents/${content.id}`
+          let backURL = req.header('Referer') || AdminRoutes.editContentPath(content.id)
           console.log('error: ', error);
           res.redirect(backURL)
         })
@@ -74,12 +85,13 @@ class ContentsController {
     try {
       db.content.findByPk(id).then(content => {
         content.destroy({ force: true }).then(content => {
-          res.redirect('/admin/contents')
+          res.redirect(AdminRoutes.contentsPath())
         }).catch(error => { done(error) })
       }).catch(error => { done(error) })
     } catch(error) { done(error) }
   }
 
+  // convert string value for category id from string to integer if it possible
   static permittedParams() {
     return Joi.object().keys({
       title: Joi.string(),

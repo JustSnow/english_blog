@@ -1,25 +1,26 @@
 extends ../../layouts/admin
 
 block content
-  h1 New content
+  h1 Edit content
   
   // TODO: try to reuse form from new action
-  form.l-admin-page-form(action=`${adminRoutes.createContentPath()}` method='POST')
-    input(type='hidden' name='contentCategoryId' value=`${contentCategories[0].id}`)
+  form.l-admin-page-form(action=`${adminRoutes.updateContentPath(content.id)}` method='POST')
+    p!= JSON.stringify(contentCategories)
+    input(type='hidden' name='_method' value='PUT')
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-title') Title
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-title(type='text' name='title')
+        input.form-control#b-content-title(type='text' name='title' value=`${content.title}`)
           
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-alias') Alias
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-alias(type='text' name='alias')
+        input.form-control#b-content-alias(type='text' name='alias' value=`${content.alias}`)
           
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
       .l-admin-page-form-input-wrapper
-        textarea.form-control#b-content-description(type='text' name='description')
+        textarea.form-control#b-content-description(type='text' name='description')= content.description
           
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save
