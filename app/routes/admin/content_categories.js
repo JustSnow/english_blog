@@ -5,14 +5,14 @@ import ValidateSchema from 'express-validate-schema'
 const router = Router()
 
 router.get('/new', ContentCategoriesController.new)
+router.get('/:id(\\d+)/edit', ContentCategoriesController.edit)
 
 router.route('/')
   .get(ContentCategoriesController.index)
   .post(ValidateSchema().params(ContentCategoriesController.permittedParams()), ContentCategoriesController.create)
-  .put(ContentCategoriesController.update)
 
 router.route('/:id(\\d+)')
-  .get(ContentCategoriesController.show)
+  .put(ContentCategoriesController.update)
   .delete(ContentCategoriesController.delete)
 
 export default router

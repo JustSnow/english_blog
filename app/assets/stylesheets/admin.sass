@@ -26,3 +26,16 @@
   .l-admin-page-content, .l-admin-page-navigation
     +make-container
     +make-container-max-widths((xl: 960px))
+
+  // TODO move to separate partial
+  .l-admin-page-form
+    +make-container
+
+  .l-admin-page-form-row
+    +make-row
+
+  .l-admin-page-form-input-wrapper
+    +make-col(10)
+
+  .l-admin-page-form-label
+    +make-col(2)
