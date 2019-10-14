@@ -2,14 +2,31 @@ extends ../../layouts/admin
 
 block content
   h1 Contents
-  if contents
-    ul
-      each content in contents
-        li
-          p= content.title
-          p= content.alias
-          p= content.description
-          p Show content categories select
-          form(method='POST' action=`/contents/${content.id}`)
-            input(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')") 
-            input(type='hidden' name='_method' value='DELETE')
+  
+  table.table.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th(scope='col') #
+        th(scope='col') Name
+        th(scope='col') Alias
+        th(scope='col') Description
+        th(scope='col') Actions
+    tbody
+      if contents
+        each content in contents
+          tr
+            th(scope='row')= content.id
+            td= content.title
+            td= content.alias
+            td= content.alias
+            td
+              .btn-group(role='group' aria-label='Content actions')
+                // use js to move button out of form for see proper styles to be applied to group of buttons
+                form(method='POST' action=`${adminRoutes.deleteContentPath(content.id)}`)
+                  input.btn(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')") 
+                  input(type='hidden' name='_method' value='DELETE')
+                
+                a.btn.btn-success(href=`${adminRoutes.editContentPath(content.id)}`) Edit
+      else
+        tr
+          td(rowspan=5) No contents
