@@ -2,29 +2,28 @@ extends ../../layouts/admin
 
 block content
   h1 New content
-  
+
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.createContentPath()}` method='POST')
-    input(type='hidden' name='contentCategoryId' value=`${contentCategories[0].id}`)
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-title') Title
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-title(type='text' name='title')
-          
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-alias') Alias
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-alias(type='text' name='alias')
-          
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category') Content category
       .l-admin-page-form-input-wrapper
         include ../content_categories/_categories_select.pug
-          
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
       .l-admin-page-form-input-wrapper
-        textarea.form-control#b-content-description(type='text' name='description')
-          
+        textarea.form-control.b-reach-text-editor#b-content-description(type='text' name='description')
+
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save
