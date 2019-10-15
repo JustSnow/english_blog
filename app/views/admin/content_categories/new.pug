@@ -2,22 +2,22 @@ extends ../../layouts/admin
 
 block content
   h1 New content category
-    
+
   form.l-admin-page-form(action=`${adminRoutes.createContentCategoryPath()}` method='POST')
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-title') Title
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-category-title(type='text' name='title')
-          
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-alias') Alias
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-category-alias(type='text' name='alias')
-          
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-description') Description
       .l-admin-page-form-input-wrapper
-        textarea.form-control#b-content-category-description(type='text' name='description')
-          
+        textarea.form-control.b-reach-text-editor#b-content-category-description(type='text' name='description')
+
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save

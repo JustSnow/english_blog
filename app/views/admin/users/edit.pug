@@ -1,25 +1,25 @@
 extends ../../layouts/admin
 
 block content
-  h1 New user
+  h1 User editor
 
   // TODO: try to reuse form from new action
-  form.l-admin-page-form(action=`${adminRoutes.createUserPath()}` method='POST')
+  form.l-admin-page-form(action=`${adminRoutes.updateUserPath(user.id)}` method='POST')
     input(type='hidden' name='_method' value='PUT')
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-first-name') First name
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-first-name(type='text' name='firstName')
+        input.form-control#b-content-category-first-name(type='text' name='firstName' value=`${user.firstName}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-last-name') Last name
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-last-name(type='text' name='lastName')
+        input.form-control#b-content-category-last-name(type='text' name='lastName' value=`${user.lastName}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-email') Email
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-email(type='text' name='email')
+        input.form-control#b-content-category-email(type='text' name='email' value=`${user.email}`)
 
     p Here should be select for roles
 

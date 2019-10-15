@@ -1,14 +1,36 @@
 extends ../../layouts/admin
 
 block content
-  h1 Test
-  if users
-    ul
-      each user in users
-        li
-          p= user.firstName
-          p= user.lastName
-          p= user.email
-          form(method='POST' action=`/users/${user.id}`)
-            input(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')") 
-            input(type='hidden' name='_method' value='DELETE')
+  h1 Users
+  p
+    a.btn.btn-primary(href=`${adminRoutes.newUserPath()}`) New user
+
+  table.table.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th(scope='col') #
+        th(scope='col') FirstName
+        th(scope='col') LastName
+        th(scope='col') Email
+        th(scope='col') Role
+        th(scope='col') Actions
+    tbody
+      if users
+        each user in users
+          tr
+            th(scope='row')= user.id
+            td= user.firstName
+            td= user.lastName
+            td= user.email
+            td= user.role
+            td
+              .btn-group(role='group' aria-label='User actions')
+                // use js to move button out of form for see proper styles to be applied to group of buttons
+                form(method='POST' action=`${adminRoutes.deleteUserPath(user.id)}`)
+                  input.btn(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')")
+                  input(type='hidden' name='_method' value='DELETE')
+
+                a.btn.btn-success(href=`${adminRoutes.editUserPath(user.id)}`) Edit
+      else
+        tr
+          td(rowspan=6) No users

@@ -14,6 +14,10 @@ class AdminRoutes{
     return this.usersPath()
   }
 
+  static newUserPath() {
+    return `${this.routePrefix}/users/new`
+  }
+
   static updateUserPath(userId) {
     return `${this.routePrefix}/users/${userId}`
   }
@@ -36,7 +40,7 @@ class AdminRoutes{
   }
 
   static newContentPath() {
-    return `${this.routePrefix}/contents/new` 
+    return `${this.routePrefix}/contents/new`
   }
 
   static updateContentPath(userId) {

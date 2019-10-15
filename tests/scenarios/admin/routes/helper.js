@@ -31,6 +31,15 @@ describe('user routes', () => {
     })
   })
 
+  describe('.newUserPath', () => {
+    let expectedRoutePath = '/admin/users/new'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.newUserPath()).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
   describe('.updateUserPath', () => {
     let expectedRoutePath = '/admin/users/2'
 

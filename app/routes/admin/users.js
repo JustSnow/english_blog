@@ -5,14 +5,14 @@ import ValidateSchema from 'express-validate-schema'
 const router = Router()
 
 router.get('/new', UsersController.new)
+router.get('/:id(\\d+)/edit', UsersController.edit)
 
 router.route('/')
   .get(UsersController.index)
   .post(ValidateSchema().params(UsersController.permittedParams()), UsersController.create)
-  .put(UsersController.update)
 
 router.route('/:id(\\d+)')
-  .get(UsersController.show)
+  .put(UsersController.update)
   .delete(UsersController.delete)
 
 export default router

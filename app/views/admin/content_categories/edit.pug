@@ -2,7 +2,7 @@ extends ../../layouts/admin
 
 block content
   h1 Content category editor
-  
+
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.updateContentCategoryPath(contentCategory.id)}` method='POST')
     input(type='hidden' name='_method' value='PUT')
@@ -10,17 +10,16 @@ block content
       label.col-form-label.l-admin-page-form-label(for='b-content-category-title') Title
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-category-title(type='text' name='title' value=`${contentCategory.title}`)
-          
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-alias') Alias
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-category-alias(type='text' name='alias' value=`${contentCategory.alias}`)
-          
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-description') Description
       .l-admin-page-form-input-wrapper
-        textarea.form-control#b-content-category-description(type='text' name='description')= contentCategory.description
-          
+        textarea.form-control.b-reach-text-editor#b-content-category-description(type='text' name='description')= contentCategory.description
+
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save
-      

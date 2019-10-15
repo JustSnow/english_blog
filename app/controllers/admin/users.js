@@ -1,6 +1,7 @@
 import finalhandler from 'finalhandler'
 import db from '../../models'
 import Joi from 'joi'
+import AdminRoutes from '../../routes/admin/helper'
 
 class UsersController {
   static async index(req, res) {
@@ -17,13 +18,13 @@ class UsersController {
     res.render('admin/users/new')
   }
 
-  static async show(req, res) {
+  static async edit(req, res) {
     let done = finalhandler(req, res)
     const { id } = req.params
 
     try {
       db.user.findByPk(id).then(user => {
-        res.render('admin/users/show', { user: user.get() })
+        res.render('admin/users/edit', { user: user.get() })
       }).catch(error => { done(error) })
     } catch (error) {
       done(error)
@@ -36,7 +37,7 @@ class UsersController {
 
     try {
       db.user.create(params).then(user => {
-        res.redirect(`/admin/users/${user.id}`)
+        res.redirect(AdminRoutes.editUserPath(user.id))
       }).catch(error => {
         console.log('error: ', error);
         res.render('admin/users/new', { params: params })
@@ -52,9 +53,9 @@ class UsersController {
     try {
       db.user.findByPk(id).then(user => {
         user.update(params).then(user => {
-          res.redirect(`/admin/users/${user.id}`)
+          res.redirect(AdminRoutes.editUserPath(user.id))
         }).catch(error => {
-          let backURL = req.header('Referer') || `/admin/users/${user.id}`
+          let backURL = req.header('Referer') || AdminRoutes.editUserPath(user.id)
           console.log('error: ', error);
           res.redirect(backURL)
         })
@@ -69,7 +70,7 @@ class UsersController {
     try {
       db.user.findByPk(id).then(user => {
         user.destroy({ force: true }).then(user => {
-          res.redirect('/admin/users')
+          res.redirect(AdminRoutes.usersPath())
         }).catch(error => { done(error) })
       }).catch(error => { done(error) })
     } catch(error) { done(error) }
