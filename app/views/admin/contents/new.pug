@@ -17,6 +17,11 @@ block content
         input.form-control#b-content-alias(type='text' name='alias')
           
     .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-category') Content category
+      .l-admin-page-form-input-wrapper
+        include ../content_categories/_categories_select.pug
+          
+    .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
       .l-admin-page-form-input-wrapper
         textarea.form-control#b-content-description(type='text' name='description')

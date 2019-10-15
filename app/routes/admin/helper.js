@@ -35,6 +35,10 @@ class AdminRoutes{
     return this.contentsPath()
   }
 
+  static newContentPath() {
+    return `${this.routePrefix}/contents/new` 
+  }
+
   static updateContentPath(userId) {
     return `${this.routePrefix}/contents/${userId}`
   }
@@ -54,6 +58,10 @@ class AdminRoutes{
 
   static createContentCategoryPath() {
     return this.contentCategoriesPath()
+  }
+
+  static newContentCategoryPath() {
+    return `${this.routePrefix}/content-categories/new`
   }
 
   static updateContentCategoryPath(userId) {

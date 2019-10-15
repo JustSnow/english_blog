@@ -78,6 +78,15 @@ describe('content routes', () => {
     })
   })
 
+  describe('.newContentPath', () => {
+    let expectedRoutePath = '/admin/contents/new'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.newContentPath()).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
   describe('.updateContentPath', () => {
     let expectedRoutePath = '/admin/contents/2'
 
@@ -121,6 +130,15 @@ describe('content category routes', () => {
 
     it('returns proper path', (done) => {
       expect(AdminRoutes.createContentCategoryPath()).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
+  describe('.newContentCategoryPath', () => {
+    let expectedRoutePath = '/admin/content-categories/new'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.newContentCategoryPath()).to.equal(expectedRoutePath)
       done()
     })
   })

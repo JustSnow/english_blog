@@ -9,8 +9,6 @@ class ContentsController {
     let done = finalhandler(req, res)
 
     try {
-      // TODO read about assosiations
-      // SequelizeDatabaseError: column "ContentCategoryId" does not exist
       db.content.findAll().then(contents => {
         res.render('admin/contents/index', { contents: contents })
       }).catch(error => { done(error) })
@@ -18,7 +16,7 @@ class ContentsController {
   }
 
   static async new(req, res) {
-    let contentCategories = db.contentCategory.findAll({ attributes: ['id', 'title'] })
+    let contentCategories = ContentsController._getContentCategories()
 
     Promise.all([contentCategories]).then(responses => {
       res.render('admin/contents/new', { contentCategories: responses[0] })
@@ -33,7 +31,7 @@ class ContentsController {
 
     try {
       let content = db.content.findByPk(id)
-      let contentCategories = db.contentCategory.findAll({ attributes: ['id', 'title'] })
+      let contentCategories = ContentsController._getContentCategories()
 
       Promise.all([
         content,
@@ -98,6 +96,10 @@ class ContentsController {
       alias: Joi.string(),
       description: Joi.string()
     })
+  }
+
+  static _getContentCategories(fields = ['id', 'title']) {
+    return db.contentCategory.findAll({ attributes:  fields})
   }
 }
 
