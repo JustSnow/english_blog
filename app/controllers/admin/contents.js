@@ -89,12 +89,12 @@ class ContentsController {
     } catch(error) { done(error) }
   }
 
-  // convert string value for category id from string to integer if it possible
   static permittedParams() {
     return Joi.object().keys({
       title: Joi.string(),
       alias: Joi.string(),
-      description: Joi.string()
+      description: Joi.string(),
+      contentCategoryId: Joi.number().integer().required()
     })
   }
 

@@ -15,7 +15,8 @@ class UsersController {
   }
 
   static async new(req, res) {
-    res.render('admin/users/new')
+    let roleValues = db.user.roleValues()
+    res.render('admin/users/new', { roleValues: roleValues })
   }
 
   static async edit(req, res) {
@@ -24,7 +25,8 @@ class UsersController {
 
     try {
       db.user.findByPk(id).then(user => {
-        res.render('admin/users/edit', { user: user.get() })
+        let roleValues = db.user.roleValues()
+        res.render('admin/users/edit', { user: user, roleValues: roleValues })
       }).catch(error => { done(error) })
     } catch (error) {
       done(error)

@@ -1,5 +1,7 @@
 extends ../../layouts/admin
 
+include ../mixins/content_category_select
+
 block content
   h1 Edit content
 
@@ -19,7 +21,7 @@ block content
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category') Content category
       .l-admin-page-form-input-wrapper
-        include ../content_categories/_categories_select.pug
+        +contentCategorySelect(contentCategories, content.contentCategoryId)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
