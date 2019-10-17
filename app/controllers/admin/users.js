@@ -61,7 +61,7 @@ class UsersController {
           console.log('error: ', error);
           res.redirect(backURL)
         })
-      })
+      }).catch(error => { done(error) })
     } catch(error) { done(error) }
   }
 

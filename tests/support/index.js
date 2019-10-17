@@ -19,7 +19,7 @@ process.on('unhandledRejection', (reason, p) => {
 })
 
 beforeEach((done) => {
-  Models.sequelize.sync({ force: true }).then(function () {
+  Models.sequelize.sync({ force: true, logging: false }).then(function () {
     done()
   })
 })
