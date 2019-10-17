@@ -1,5 +1,7 @@
 extends ../../layouts/admin
 
+include ../mixins/user_role_select
+
 block content
   h1 User editor
 
@@ -21,7 +23,10 @@ block content
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-category-email(type='text' name='email' value=`${user.email}`)
 
-    p= roleValues
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label Role of user
+      .l-admin-page-form-input-wrapper
+        +userRolesSelect(roleValues, user.role)
 
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save

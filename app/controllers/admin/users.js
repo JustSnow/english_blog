@@ -82,7 +82,8 @@ class UsersController {
     return Joi.object().keys({
       firstName: Joi.string(),
       lastName: Joi.string(),
-      email: Joi.string()
+      email: Joi.string(),
+      role: Joi.string()
     })
   }
 }

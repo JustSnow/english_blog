@@ -1,11 +1,12 @@
 extends ../../layouts/admin
 
+include ../mixins/user_role_select
+
 block content
   h1 New user
 
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.createUserPath()}` method='POST')
-    input(type='hidden' name='_method' value='PUT')
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-first-name') First name
       .l-admin-page-form-input-wrapper
@@ -21,7 +22,10 @@ block content
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-category-email(type='text' name='email')
 
-    p= roleValues
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label Role of user
+      .l-admin-page-form-input-wrapper
+        +userRolesSelect(roleValues)
 
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save
