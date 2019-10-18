@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   user.associate = function(models) {
-    user.hasMany(models.content, { as: 'contents' })
-    user.hasMany(models.contentCategory, { as: 'contentCategories' })
+    user.hasMany(models.content, { as: 'contents', onDelete: 'cascade', hooks: true })
+    user.hasMany(models.contentCategory, { as: 'contentCategories', onDelete: 'cascade', hooks: true })
   };
 
   user.roleValues = () => {

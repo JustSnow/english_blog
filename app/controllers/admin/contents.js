@@ -89,12 +89,14 @@ class ContentsController {
     } catch(error) { done(error) }
   }
 
+  // TODO: be sure contentCategoryId was passed with params
+  // required() breaks all
   static permittedParams() {
     return Joi.object().keys({
       title: Joi.string(),
       alias: Joi.string(),
       description: Joi.string(),
-      contentCategoryId: Joi.number().integer().required()
+      contentCategoryId: Joi.string().alphanum()
     })
   }
 

@@ -16,8 +16,9 @@ describe('UsersController', () => {
     let user1
 
     beforeEach((done) => {
-      factory.create('user').then(user => { user1 = user.get() })
-      done()
+      factory.create('user')
+        .then(user => { user1 = user.get() })
+        .finally(done)
     })
 
     it('returns all users', (done) => {
@@ -42,8 +43,9 @@ describe('UsersController', () => {
     let user1
 
     beforeEach((done) => {
-      factory.create('user').then(user => { user1 = user.get() })
-      done()
+      factory.create('user')
+        .then(user => { user1 = user.get() })
+        .finally(done)
     })
 
     it('shows proper user by provided id', (done) => {
@@ -56,7 +58,7 @@ describe('UsersController', () => {
 
     context('when user for provided id does not exist', () => {
       it('returns 404 page', (done) => {
-        chai.request(app).get('/admin/users/blabla').end((err, res) => {
+        chai.request(app).get('/admin/users/blabla/edit').end((err, res) => {
           expect(res).to.have.status(404)
           done()
         })
@@ -68,8 +70,9 @@ describe('UsersController', () => {
     let user1
 
     beforeEach((done) => {
-      factory.create('user').then(user => { user1 = user.get() })
-      done()
+      factory.create('user')
+        .then(user => { user1 = user.get() })
+        .finally(done)
     })
 
     it('removes user from db by provided id', (done) => {
@@ -78,7 +81,7 @@ describe('UsersController', () => {
           expect(res).to.have.status(200)
           expect(user).to.be.null
           done()
-        })
+        }).catch(error => { done(error.message) })
       })
     })
 
@@ -116,19 +119,17 @@ describe('UsersController', () => {
     }
 
     beforeEach((done) => {
-      factory.create('user', { firstName: 'FIRST NAME' }).then(user => { user1 = user.get() })
-      done()
+      factory.create('user', { firstName: 'FIRST NAME' })
+        .then(user => { user1 = user.get() })
+        .finally(done)
     })
 
     it('updates user by provided id', (done) => {
       chai.request(app).put(`/admin/users/${user1.id}`).send(userParams).end((err, res) => {
-        let updatedUser = Models.user.findByPk(user1.id).then(user => {
-          expect(user.firstName).to.equal(userParams.firstName)
-
-          return Promise.resolve(user)
-        }).catch(error => { done(error.message) })
+        let updatedUser = Models.user.findByPk(user1.id)
 
         updatedUser.then(user => {
+          expect(user.firstName).to.equal(userParams.firstName)
           expect(res).to.redirectTo(new RegExp(`/admin/users/${user.id}/edit`))
           done()
         }).catch(error => { done(error.message) })
