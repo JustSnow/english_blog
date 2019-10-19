@@ -10,7 +10,7 @@ class ContentCategoriesController {
 
     try {
       db.contentCategory.findAll().then(contentCategories => {
-        res.render('admin/content_categories/index', { contentCategories: contentCategories })
+        res.render('admin/content_categories/index', { contentCategories })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
   }
@@ -27,7 +27,7 @@ class ContentCategoriesController {
 
     try {
       db.contentCategory.findByPk(id).then(contentCategory => {
-        res.render('admin/content_categories/edit', { contentCategory: contentCategory.get() })
+        res.render('admin/content_categories/edit', { contentCategory })
       }).catch(error => { done(error) })
     } catch (error) {
       done(error)
@@ -43,7 +43,7 @@ class ContentCategoriesController {
         res.redirect(AdminRoutes.editContentCategoryPath(contentCategory.id))
       }).catch(error => {
         console.log('error: ', error);
-        res.render('admin/content_categories/new', { params: params })
+        res.render('admin/content_categories/new', { params })
       })
     } catch(error) { done(error) }
   }

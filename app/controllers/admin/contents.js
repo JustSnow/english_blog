@@ -10,7 +10,7 @@ class ContentsController {
 
     try {
       db.content.findAll().then(contents => {
-        res.render('admin/contents/index', { contents: contents })
+        res.render('admin/contents/index', { contents })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
   }
@@ -18,8 +18,8 @@ class ContentsController {
   static async new(req, res) {
     let contentCategories = ContentsController._getContentCategories()
 
-    Promise.all([contentCategories]).then(responses => {
-      res.render('admin/contents/new', { contentCategories: responses[0] })
+    contentCategories.then(contentCategories => {
+      res.render('admin/contents/new', { contentCategories })
     }).catch(error => { done(error) })
   }
 
@@ -53,7 +53,7 @@ class ContentsController {
         res.redirect(AdminRoutes.editContentPath(content.id))
       }).catch(error => {
         console.log('error: ', error);
-        res.render('admin/contents/new', { params: params })
+        res.render('admin/contents/new', { params })
       })
     } catch(error) { done(error) }
   }

@@ -9,14 +9,14 @@ class UsersController {
 
     try {
       db.user.findAll().then(users => {
-        res.render('admin/users/index', { users: users })
+        res.render('admin/users/index', { users })
       }).catch(error => { done(error) })
     } catch (error) { done(error) }
   }
 
   static async new(req, res) {
     let roleValues = db.user.roleValues()
-    res.render('admin/users/new', { roleValues: roleValues })
+    res.render('admin/users/new', { roleValues })
   }
 
   static async edit(req, res) {
@@ -26,7 +26,7 @@ class UsersController {
     try {
       db.user.findByPk(id).then(user => {
         let roleValues = db.user.roleValues()
-        res.render('admin/users/edit', { user: user, roleValues: roleValues })
+        res.render('admin/users/edit', { user, roleValues })
       }).catch(error => { done(error) })
     } catch (error) {
       done(error)
@@ -42,7 +42,7 @@ class UsersController {
         res.redirect(AdminRoutes.editUserPath(user.id))
       }).catch(error => {
         console.log('error: ', error);
-        res.render('admin/users/new', { params: params })
+        res.render('admin/users/new', { params })
       })
     } catch(error) { done(error) }
   }

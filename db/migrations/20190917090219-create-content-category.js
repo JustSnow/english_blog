@@ -32,7 +32,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }).then(() => {
+      queryInterface.addIndex('contentCategories', ['userId'])
+    })
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('contentCategories');

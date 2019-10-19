@@ -42,6 +42,7 @@ module.exports = {
       }
     }).then(() => {
       queryInterface.addIndex('contents', ['contentCategoryId'])
+      queryInterface.addIndex('contents', ['userId'])
     })
   },
   down: (queryInterface, Sequelize) => {

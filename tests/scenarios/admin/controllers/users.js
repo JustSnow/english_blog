@@ -1,5 +1,5 @@
-// try to use here path.relative
-const mochaHelper = require('../../../support')
+const path = require('path')
+const mochaHelper = require(path.relative(__dirname, 'tests/support'))
 
 import chai from 'chai'
 import chaiHttp from 'chai-http'
@@ -120,15 +120,13 @@ describe('UsersController', () => {
 
     beforeEach((done) => {
       factory.create('user', { firstName: 'FIRST NAME' })
-        .then(user => { user1 = user.get() })
+        .then(user => { user1 = user })
         .finally(done)
     })
 
     it('updates user by provided id', (done) => {
       chai.request(app).put(`/admin/users/${user1.id}`).send(userParams).end((err, res) => {
-        let updatedUser = Models.user.findByPk(user1.id)
-
-        updatedUser.then(user => {
+        user1.reload().then(user => {
           expect(user.firstName).to.equal(userParams.firstName)
           expect(res).to.redirectTo(new RegExp(`/admin/users/${user.id}/edit`))
           done()
