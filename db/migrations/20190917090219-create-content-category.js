@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('contentCategories', {
+    return queryInterface.createTable('content_categories', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -26,17 +26,19 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
     }).then(() => {
-      queryInterface.addIndex('contentCategories', ['userId'])
+      queryInterface.addIndex('content_categories', ['userId'])
     })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('contentCategories');
+    return queryInterface.dropTable('content_categories');
   }
 };

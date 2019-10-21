@@ -26,19 +26,17 @@ module.exports = {
       },
       contentCategoryId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'contentCategories',
-          key: 'id'
-        }
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
     }).then(() => {
       queryInterface.addIndex('contents', ['contentCategoryId'])

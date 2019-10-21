@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     alias: DataTypes.STRING,
     description: DataTypes.TEXT
-  }, {});
+  }, {
+    tableName: 'content_categories'
+  });
   contentCategory.associate = function(models) {
     contentCategory.hasMany(models.content, { as: 'contents', onDelete: 'cascade', hooks: true })
     contentCategory.belongsTo(models.user, { as: 'user' })
