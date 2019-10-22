@@ -1,9 +1,33 @@
 doctype html
-html
+html(lang='en')
   head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title= title
     link(rel='stylesheet', href='/stylesheets/app.css')
   body
-    block content
-      
+    header.l-page-header
+      nav.h-page-navigation.navbar.navbar-expand-md.navbar-light.fixed-top
+        .container
+          a.navbar-brand(href='/') Logo
+
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#b-page-navigation', aria-controls='b-page-navigation')
+            span(class='navbar-toggler-icon')
+
+          .collapse.navbar-collapse#b-page-navigation
+            ul.navbar-nav.mr-auto.justify-content-md-center
+              li.nav-item.active
+                a.nav-link(href='#') Content Categories
+
+              li.nav-item
+                a.nav-link(href='#') Contents
+
+              li.nav-item
+                a.nav-link(href='#') Users
+
+    main.l-page-content
+      section.l-page-big-logo
+
+      block content
+
   script(src='/javascripts/app.js')

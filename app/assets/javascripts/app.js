@@ -1,2 +1,5 @@
 require('../stylesheets/app.sass')
-console.log('app.js');
+
+require('jquery/dist/jquery.slim.min')
+
+require('bootstrap/js/src/collapse')
