@@ -6,6 +6,7 @@ const path = require('path')
 const adapter = new SequelizeAdapter()
 const Models = require(path.relative(__dirname, 'app/models'))
 
+// TODO if we run all seeds, we'll get error about factory already defined
 require(path.relative(__dirname, 'tests/factories'))(factory, Models)
 
 factory.setAdapter(adapter)

@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
   entry: {
     app: './app/assets/javascripts/app.js',
-    admin: './app/assets/javascripts/admin.js'
+    admin: './app/assets/javascripts/admin.js',
+    admin_authentification: './app/assets/javascripts/admin_authentification.js'
   },
   output: {
     path: path.join(__dirname, 'public'),

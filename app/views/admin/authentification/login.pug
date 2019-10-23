@@ -1,0 +1,18 @@
+extends ../../layouts/admin_authentification
+
+block content
+  .card.h-authentification-page-form
+    .card-body
+      h4.card-title Authentification form
+      form.l-authentification-page-form(action='' method='POST')
+        .input-group.form-group
+          .input-group-prepend
+            span.input-group-text#user-email @
+          input.form-control(type='text' name='email' placeholder='Email' aria-label='Email' aria-describedby='user-email')
+
+        .input-group.form-group
+          .input-group-prepend
+            span.input-group-text#user-password #
+          input.form-control(type='password' name='password' placeholder='Email' aria-label='Email' aria-describedby='user-password')
+
+        button.btn.btn-primary(type='submit') Login
