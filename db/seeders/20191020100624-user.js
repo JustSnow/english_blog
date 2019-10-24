@@ -1,12 +1,6 @@
-import factory, { SequelizeAdapter } from 'factory-girl'
-
 const path = require('path')
-const adapter = new SequelizeAdapter()
-const Models = require(path.relative(__dirname, 'app/models'))
-
-require(path.relative(__dirname, 'tests/factories'))(factory, Models)
-
-factory.setAdapter(adapter)
+const factoryHelper = require(path.relative(__dirname, 'tests/support/factory_preparation'))
+const factory = factoryHelper.factory
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

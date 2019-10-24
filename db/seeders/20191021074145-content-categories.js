@@ -1,15 +1,7 @@
-// TODO: investrigate how load all needed libs before start seeds
-
-import factory, { SequelizeAdapter } from 'factory-girl'
-
 const path = require('path')
-const adapter = new SequelizeAdapter()
-const Models = require(path.relative(__dirname, 'app/models'))
-
-// TODO if we run all seeds, we'll get error about factory already defined
-require(path.relative(__dirname, 'tests/factories'))(factory, Models)
-
-factory.setAdapter(adapter)
+const factoryHelper = require(path.relative(__dirname, 'tests/support/factory_preparation'))
+const factory = factoryHelper.factory
+const Models = factoryHelper.Models
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

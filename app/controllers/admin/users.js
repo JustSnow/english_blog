@@ -3,6 +3,7 @@ import db from '../../models'
 import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
 
+// TODO fix problem with wrong id or if user doesn't exist in db (handle error for this)
 class UsersController {
   static async index(req, res) {
     let done = finalhandler(req, res)

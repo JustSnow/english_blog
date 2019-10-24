@@ -1,18 +1,4 @@
-const path = require('path')
-
-import factory, { SequelizeAdapter } from 'factory-girl'
-import app from '../../app'
-
-const adapter = new SequelizeAdapter()
-const Models = require(path.relative(__dirname, 'app/models'))
-
-factory.setAdapter(adapter)
-// clean the factory state - necessary for mocha watch
-factory.cleanUp()
-factory.factories = []
-
-// define factories
-require(path.relative(__dirname, 'tests/factories'))(factory, Models);
+import { app, factory, Models } from './factory_preparation'
 
 /* uncomment to see UnhandledPromiseRejectionWarning stack traces */
 process.on('unhandledRejection', (reason, p) => {
@@ -26,8 +12,4 @@ beforeEach((done) => {
   })
 })
 
-module.exports = {
-  factory: factory,
-  Models: Models,
-  app: app
-}
+module.exports = { factory, Models, app }
