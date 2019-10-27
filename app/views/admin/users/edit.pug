@@ -9,19 +9,26 @@ block content
   form.l-admin-page-form(action=`${adminRoutes.updateUserPath(user.id)}` method='POST')
     input(type='hidden' name='_method' value='PUT')
     .form-group.l-admin-page-form-row
-      label.col-form-label.l-admin-page-form-label(for='b-content-category-first-name') First name
+      label.col-form-label.l-admin-page-form-label(for='b-user-first-name') First name
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-first-name(type='text' name='firstName' value=`${user.firstName}`)
+        input.form-control#b-user-first-name(type='text' name='firstName' value=`${user.firstName}`)
 
     .form-group.l-admin-page-form-row
-      label.col-form-label.l-admin-page-form-label(for='b-content-category-last-name') Last name
+      label.col-form-label.l-admin-page-form-label(for='b-user-last-name') Last name
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-last-name(type='text' name='lastName' value=`${user.lastName}`)
+        input.form-control#b-user-last-name(type='text' name='lastName' value=`${user.lastName}`)
 
     .form-group.l-admin-page-form-row
-      label.col-form-label.l-admin-page-form-label(for='b-content-category-email') Email
+      label.col-form-label.l-admin-page-form-label(for='b-user-email') Email
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-email(type='text' name='email' value=`${user.email}`)
+        input.form-control#b-user-email(type='text' name='email' value=`${user.email}`)
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-user-password') Password
+      .l-admin-page-form-input-wrapper
+        //- TODO show here unheshed password
+        //- or remove it from incoming params
+        input.form-control#b-user-password(type='password' name='password' value=`${user.password}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label Role of user

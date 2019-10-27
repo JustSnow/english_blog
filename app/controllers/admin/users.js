@@ -36,7 +36,7 @@ class UsersController {
 
   static async create(req, res) {
     let done = finalhandler(req, res)
-    const params = req.body
+    const params = await UsersController._generateHashedPassword(req.body)
 
     try {
       db.user.create(params).then(user => {
@@ -51,7 +51,7 @@ class UsersController {
   static async update(req, res) {
     let done = finalhandler(req, res)
     const { id } = req.params
-    const params = req.body
+    const params = await UsersController._generateHashedPassword(req.body)
 
     try {
       db.user.findByPk(id).then(user => {
@@ -84,8 +84,14 @@ class UsersController {
       firstName: Joi.string(),
       lastName: Joi.string(),
       email: Joi.string(),
-      role: Joi.string()
+      role: Joi.string(),
+      password: Joi.string()
     })
+  }
+
+  static async _generateHashedPassword(params) {
+    params.password = await db.user.generateHashedPassword(params.password)
+    return params
   }
 }
 

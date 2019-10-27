@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import UsersController from '../../controllers/admin/users'
+// TODO try to use https://express-validator.github.io
 import ValidateSchema from 'express-validate-schema'
 
 const router = Router()

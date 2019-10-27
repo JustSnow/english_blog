@@ -99,7 +99,8 @@ describe('UsersController', () => {
     let userParams = {
       firstName: 'test First name',
       lastName: 'test Last Name',
-      email: 'blabla@gmail.com'
+      email: 'blabla@gmail.com',
+      password: 'test'
     }
 
     it('creates a user by provided params', (done) => {
@@ -115,7 +116,8 @@ describe('UsersController', () => {
     let userParams = {
       firstName: 'test First name',
       lastName: 'test Last Name',
-      email: 'blabla@gmail.com'
+      email: 'blabla@gmail.com',
+      password: 'blabla'
     }
 
     beforeEach((done) => {

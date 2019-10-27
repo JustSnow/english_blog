@@ -5,6 +5,7 @@ module.exports = (factory, Models) => {
     firstName: () => faker.name.findName(),
     lastName: () => faker.name.findName(),
     email: () => faker.internet.email(),
-    role: () => faker.random.arrayElement(Models.user.roleValues())
+    role: () => faker.random.arrayElement(Models.user.roleValues()),
+    password: () => faker.internet.password(8)
   })
 }
