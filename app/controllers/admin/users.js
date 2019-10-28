@@ -2,6 +2,7 @@ import finalhandler from 'finalhandler'
 import db from '../../models'
 import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
+import createError from 'http-errors'
 
 // TODO fix problem with wrong id or if user doesn't exist in db (handle error for this)
 class UsersController {
@@ -20,17 +21,19 @@ class UsersController {
     res.render('admin/users/new', { roleValues })
   }
 
-  static async edit(req, res) {
+  static async edit(req, res, next) {
     let done = finalhandler(req, res)
     const { id } = req.params
 
     try {
       db.user.findByPk(id).then(user => {
+        if (user === null) { throw new createError.NotFound() }
+
         let roleValues = db.user.roleValues()
         res.render('admin/users/edit', { user, roleValues })
-      }).catch(error => { done(error) })
-    } catch (error) {
-      done(error)
+      }).catch(next)
+    } catch(error) {
+      next(error)
     }
   }
 
@@ -48,13 +51,15 @@ class UsersController {
     } catch(error) { done(error) }
   }
 
-  static async update(req, res) {
+  static async update(req, res, next) {
     let done = finalhandler(req, res)
     const { id } = req.params
     const params = await UsersController._generateHashedPassword(req.body)
 
     try {
       db.user.findByPk(id).then(user => {
+        if (user === null) { throw new createError.NotFound() }
+
         user.update(params).then(user => {
           res.redirect(AdminRoutes.editUserPath(user.id))
         }).catch(error => {
@@ -62,8 +67,8 @@ class UsersController {
           console.log('error: ', error);
           res.redirect(backURL)
         })
-      }).catch(error => { done(error) })
-    } catch(error) { done(error) }
+      }).catch(next)
+    } catch(error) { next(error) }
   }
 
   static async delete(req, res) {

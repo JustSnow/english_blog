@@ -9,14 +9,14 @@ import AdminAuthentificationController from '../../controllers/admin/authentific
 
 const router = Router()
 
-// TODO move into separate router like usersRouter
-router.get('/login', AdminAuthentificationController.login)
-router.post('/login', AdminAuthentificationController.authenticate)
+router.route('/login')
+  .get(AdminAuthentificationController.login)
+  .post(AdminAuthentificationController.authenticate)
 router.delete('/logout', AdminAuthentificationController.logout)
 
 router.use('/users', usersRouter)
 router.use('/content-categories', contentCategoriesRouter)
 router.use('/contents', contentsRouter)
-router.use('/', UsersController.index)
+router.use('\/$', UsersController.index)
 
 export default router

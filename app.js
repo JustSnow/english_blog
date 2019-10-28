@@ -10,7 +10,7 @@ import initPassportConfig from './config/passport'
 import adminRouter from './app/routes/admin/index'
 import indexRouter from './app/routes/index'
 
-import AdminRoutes from './app/routes/admin/helper'
+import applyAdminVariables from './app/presenters/admin'
 
 const app = express()
 const session = require('express-session')
@@ -22,11 +22,6 @@ initPassportConfig(passport)
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'))
 app.set('view engine', 'pug')
-
-app.use((req, res, next) => {
-  res.locals.adminRoutes = AdminRoutes
-  next();
-})
 
 app.use(logger('common'))
 app.use(express.json())
@@ -52,7 +47,7 @@ app.use(methodOverride((req, res) => {
 morganBody(app, { logResponseBody: false })
 
 app.use('/', indexRouter)
-app.use('/admin', adminRouter)
+app.use('/admin', applyAdminVariables, adminRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>

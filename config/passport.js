@@ -27,6 +27,7 @@ function initPassportConfig(passport) {
   passport.use(new Strategy({ usernameField: 'email' }, authenticateUser))
   passport.serializeUser((user, done) => { done(null, user.id) })
   passport.deserializeUser((id, done) => {
+    // TODO if it possible take stored user from session or response
     db.user.findByPk(id).then((error, user) => {
       console.log('id: ', id, user);
       if (error) { return done(error) }

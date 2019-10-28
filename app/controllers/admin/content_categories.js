@@ -2,6 +2,7 @@ import finalhandler from 'finalhandler'
 import db from '../../models'
 import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
+import createError from 'http-errors'
 
 // TODO refactor me add dry with General CRUD class
 class ContentCategoriesController {
@@ -19,18 +20,18 @@ class ContentCategoriesController {
     res.render('admin/content_categories/new')
   }
 
-  static async edit(req, res) {
+  static async edit(req, res, next) {
     let done = finalhandler(req, res)
     const { id } = req.params
 
-    if (!Number(id)) { return done() }
-
     try {
       db.contentCategory.findByPk(id).then(contentCategory => {
+        if (contentCategory === null) { throw new createError.NotFound() }
+
         res.render('admin/content_categories/edit', { contentCategory })
-      }).catch(error => { done(error) })
+      }).catch(next)
     } catch (error) {
-      done(error)
+      next(error)
     }
   }
 
@@ -55,6 +56,8 @@ class ContentCategoriesController {
 
     try {
       db.contentCategory.findByPk(id).then(contentCategory => {
+        if (contentCategory === null) { throw new createError.NotFound() }
+
         contentCategory.update(params).then(contentCategory => {
           res.redirect(AdminRoutes.editContentCategoryPath(contentCategory.id))
         }).catch(error => {
@@ -62,7 +65,7 @@ class ContentCategoriesController {
           console.log('error: ', error);
           res.redirect(backURL)
         })
-      })
+      }).catch(done)
     } catch(error) { done(error) }
   }
 

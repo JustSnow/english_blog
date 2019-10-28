@@ -17,13 +17,15 @@ html(lang='en')
           .collapse.navbar-collapse#b-page-navigation
             ul.navbar-nav.mr-auto.justify-content-md-center
               li.nav-item.active
-                a.nav-link(href='#') Content Categories
+                a.nav-link(href='#') About
+
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle#l-page-contents-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Contents
+                .dropdown-menu(aria-labelledby='l-page-contents-dropdown')
+                  a.dropdown-item(href='#') Action
 
               li.nav-item
-                a.nav-link(href='#') Contents
-
-              li.nav-item
-                a.nav-link(href='#') Users
+                a.nav-link(href='#') Contacts
 
     main.l-page-content
       section.l-page-big-logo

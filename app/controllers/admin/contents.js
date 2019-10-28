@@ -2,6 +2,7 @@ import finalhandler from 'finalhandler'
 import db from '../../models'
 import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
+import createError from 'http-errors'
 
 // TODO refactor me add dry with General CRUD class
 class ContentsController {
@@ -11,23 +12,22 @@ class ContentsController {
     try {
       db.content.findAll().then(contents => {
         res.render('admin/contents/index', { contents })
-      }).catch(error => { done(error) })
+      }).catch(done)
     } catch (error) { done(error) }
   }
 
   static async new(req, res) {
     let contentCategories = ContentsController._getContentCategories()
+    let done = finalhandler(req, res)
 
     contentCategories.then(contentCategories => {
       res.render('admin/contents/new', { contentCategories })
-    }).catch(error => { done(error) })
+    }).catch(done)
   }
 
-  static async edit(req, res) {
+  static async edit(req, res, next) {
     let done = finalhandler(req, res)
     const { id } = req.params
-
-    if (!Number(id)) { return done() }
 
     try {
       let content = db.content.findByPk(id)
@@ -37,10 +37,12 @@ class ContentsController {
         content,
         contentCategories
       ]).then(responses => {
+        if (responses[0] === null) { throw new createError.NotFound() }
+
         res.render('admin/contents/edit', { content: responses[0].get(), contentCategories: responses[1] })
-      }).catch(error => { done(error) })
+      }).catch(next)
     } catch (error) {
-      done(error)
+      next(error)
     }
   }
 
@@ -58,13 +60,15 @@ class ContentsController {
     } catch(error) { done(error) }
   }
 
-  static async update(req, res) {
+  static async update(req, res, next) {
     let done = finalhandler(req, res)
     const { id } = req.params
     const params = req.body
 
     try {
       db.content.findByPk(id).then(content => {
+        if (content === null) { throw new createError.NotFound() }
+
         content.update(params).then(content => {
           res.redirect(AdminRoutes.editContentPath(content.id))
         }).catch(error => {
@@ -72,8 +76,8 @@ class ContentsController {
           console.log('error: ', error);
           res.redirect(backURL)
         })
-      })
-    } catch(error) { done(error) }
+      }).catch(next)
+    } catch(error) { next(error) }
   }
 
   static async delete(req, res) {
@@ -84,8 +88,8 @@ class ContentsController {
       db.content.findByPk(id).then(content => {
         content.destroy({ force: true }).then(content => {
           res.redirect(AdminRoutes.contentsPath())
-        }).catch(error => { done(error) })
-      }).catch(error => { done(error) })
+        }).catch(done)
+      }).catch(done)
     } catch(error) { done(error) }
   }
 
