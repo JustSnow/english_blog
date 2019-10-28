@@ -1,8 +1,8 @@
 const path = require('path')
 const bcrypt = require('bcrypt')
-const db = require(path.relative(__dirname, 'app/models/')).db
 
 import { Strategy } from 'passport-local'
+import db from '../app/models'
 
 function authenticateUser(email, password, done) {
   try {
@@ -28,6 +28,7 @@ function initPassportConfig(passport) {
   passport.serializeUser((user, done) => { done(null, user.id) })
   passport.deserializeUser((id, done) => {
     db.user.findByPk(id).then((error, user) => {
+      console.log('id: ', id, user);
       if (error) { return done(error) }
       return done(null, user)
     })

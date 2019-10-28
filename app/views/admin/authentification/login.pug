@@ -4,7 +4,8 @@ block content
   .card.h-authentification-page-form
     .card-body
       h4.card-title Authentification form
-      form.l-authentification-page-form(action='' method='POST')
+      p= JSON.stringify(messages)
+      form.l-authentification-page-form(action='/admin/login' method='POST')
         .input-group.form-group
           .input-group-prepend
             span.input-group-text#user-email @
