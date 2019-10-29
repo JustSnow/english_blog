@@ -17,20 +17,23 @@ html(lang='en')
           .collapse.navbar-collapse#b-page-navigation
             ul.navbar-nav.mr-auto.justify-content-md-center
               li.nav-item.active
-                a.nav-link(href='#') About
+                a.nav-link(href='/about') About
 
-              li.nav-item.dropdown
-                a.nav-link.dropdown-toggle#l-page-contents-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Contents
-                .dropdown-menu(aria-labelledby='l-page-contents-dropdown')
-                  a.dropdown-item(href='#') Action
+              if contentCategories
+                li.nav-item.dropdown
+                  a.nav-link.dropdown-toggle#l-page-contents-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Content categories
+                  .dropdown-menu(aria-labelledby='l-page-contents-dropdown')
+                    each contentCategory in contentCategories
+                      a.dropdown-item(href=`/content-categories/${contentCategory.id}`)= contentCategory.title
 
               li.nav-item
-                a.nav-link(href='#') Contacts
+                a.nav-link(href='/policy-and-privacy') Policy and Privacy
+
+              li.nav-item
+                a.nav-link(href='/contacts') Contacts
 
     main.l-page-content
       section.l-page-big-logo
-      section
-        img(src='/images/hero-banner.png')
 
       block content
 

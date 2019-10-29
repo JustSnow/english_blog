@@ -15,6 +15,16 @@
   +make-container
   +make-container-max-widths((xl: 960px))
 
+.h-page-navigation
+  padding:
+    left: 0
+    right: 0
+
+  & > .container
+    width: 100%
+
 .l-page-big-logo
-  +make-row
-  background-image: url('../images/hero-banner.png')
+  width: 100%
+  background: url('../images/hero-banner.png') left center no-repeat
+  min-height: 400px
+  background-size: cover

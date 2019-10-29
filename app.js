@@ -11,6 +11,7 @@ import adminRouter from './app/routes/admin/index'
 import indexRouter from './app/routes/index'
 
 import applyAdminVariables from './app/presenters/admin'
+import applyLayoutVariables from './app/presenters/layout'
 
 const app = express()
 const session = require('express-session')
@@ -46,7 +47,7 @@ app.use(methodOverride((req, res) => {
 
 morganBody(app, { logResponseBody: false })
 
-app.use('/', indexRouter)
+app.use('/', applyLayoutVariables, indexRouter)
 app.use('/admin', applyAdminVariables, adminRouter)
 
 // catch 404 and forward to error handler
