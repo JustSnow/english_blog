@@ -1,0 +1,25 @@
+extends ../../layouts/admin
+
+block content
+  h1 Static page editor
+
+  // TODO: try to reuse form from new action
+  form.l-admin-page-form(action=`${adminRoutes.updatePagePath(page.id)}` method='POST')
+    input(type='hidden' name='_method' value='PUT')
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-page-title') Title
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-page-title(type='text' name='title' value=`${page.title}`)
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-page-alias') Alias
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-page-alias(type='text' name='alias' value=`${page.alias}`)
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-page-description') Description
+      .l-admin-page-form-input-wrapper
+        textarea.form-control.b-reach-text-editor#b-page-description(type='text' name='description')= page.description
+
+    .form-group.l-admin-page-form-row
+      button.btn.btn-success(type='submit') Save

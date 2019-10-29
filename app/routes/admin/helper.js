@@ -31,8 +31,8 @@ class AdminRoutes{
     return `${this.routePrefix}/contents`
   }
 
-  static editContentPath(userId) {
-    return `${this.routePrefix}/contents/${userId}/edit`
+  static editContentPath(contentId) {
+    return `${this.routePrefix}/contents/${contentId}/edit`
   }
 
   static createContentPath() {
@@ -43,12 +43,12 @@ class AdminRoutes{
     return `${this.routePrefix}/contents/new`
   }
 
-  static updateContentPath(userId) {
-    return `${this.routePrefix}/contents/${userId}`
+  static updateContentPath(contentId) {
+    return `${this.routePrefix}/contents/${contentId}`
   }
 
-  static deleteContentPath(userId) {
-    return this.updateContentPath(userId)
+  static deleteContentPath(contentId) {
+    return this.updateContentPath(contentId)
   }
 
   // content category routes
@@ -56,8 +56,8 @@ class AdminRoutes{
     return `${this.routePrefix}/content-categories`
   }
 
-  static editContentCategoryPath(userId) {
-    return `${this.routePrefix}/content-categories/${userId}/edit`
+  static editContentCategoryPath(contentCategoryId) {
+    return `${this.routePrefix}/content-categories/${contentCategoryId}/edit`
   }
 
   static createContentCategoryPath() {
@@ -68,12 +68,37 @@ class AdminRoutes{
     return `${this.routePrefix}/content-categories/new`
   }
 
-  static updateContentCategoryPath(userId) {
-    return `${this.routePrefix}/content-categories/${userId}`
+  static updateContentCategoryPath(contentCategoryId) {
+    return `${this.routePrefix}/content-categories/${contentCategoryId}`
   }
 
-  static deleteContentCategoryPath(userId) {
-    return this.updateContentCategoryPath(userId)
+  static deleteContentCategoryPath(contentCategoryId) {
+    return this.updateContentCategoryPath(contentCategoryId)
+  }
+
+  // page routes
+  static pagesPath() {
+    return `${this.routePrefix}/pages`
+  }
+
+  static editPagePath(pageId) {
+    return `${this.routePrefix}/pages/${pageId}/edit`
+  }
+
+  static createPagePath() {
+    return this.pagesPath()
+  }
+
+  static newPagePath() {
+    return `${this.routePrefix}/pages/new`
+  }
+
+  static updatePagePath(pageId) {
+    return `${this.routePrefix}/pages/${pageId}`
+  }
+
+  static deletePagePath(pageId) {
+    return this.updatePagePath(pageId)
   }
 }
 

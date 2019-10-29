@@ -16,6 +16,7 @@ html(lang='en')
 
           .collapse.navbar-collapse#b-admin-page-navigation
             ul.navbar-nav.mr-auto
+              - // TODO handle active menu item
               li.nav-item.active
                 a.nav-link(href=`${adminRoutes.contentCategoriesPath()}`) Content Categories
 
@@ -24,6 +25,9 @@ html(lang='en')
 
               li.nav-item
                 a.nav-link(href=`${adminRoutes.usersPath()}`) Users
+
+              li.nav-item
+                a.nav-link(href=`${adminRoutes.pagesPath()}`) Static pages
 
             form.form-inline.my-2.my-lg-0(action='/admin/logout' method='POST')
               input(type='hidden' name='_method' value='DELETE')

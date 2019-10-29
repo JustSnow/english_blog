@@ -1,0 +1,23 @@
+extends ../../layouts/admin
+
+block content
+  h1 New static page
+
+  form.l-admin-page-form(action=`${adminRoutes.createPagePath()}` method='POST')
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-page-title') Title
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-page-title(type='text' name='title')
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-page-alias') Alias
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-page-alias(type='text' name='alias')
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-page-description') Description
+      .l-admin-page-form-input-wrapper
+        textarea.form-control.b-reach-text-editor#b-page-description(type='text' name='description')
+
+    .form-group.l-admin-page-form-row
+      button.btn.btn-success(type='submit') Save

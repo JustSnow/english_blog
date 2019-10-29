@@ -170,3 +170,59 @@ describe('content category routes', () => {
     })
   })
 })
+
+describe('page routes', () => {
+  describe('.pagesPath', () => {
+    let expectedRoutePath = '/admin/pages'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.pagesPath()).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
+  describe('.editPagePath', () => {
+    let expectedRoutePath = '/admin/pages/1/edit'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.editPagePath(1)).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
+  describe('.createPagePath', () => {
+    let expectedRoutePath = '/admin/pages'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.createPagePath()).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
+  describe('.newPagePath', () => {
+    let expectedRoutePath = '/admin/pages/new'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.newPagePath()).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
+  describe('.updatePagePath', () => {
+    let expectedRoutePath = '/admin/pages/2'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.updatePagePath(2)).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+
+  describe('.deletePagePath', () => {
+    let expectedRoutePath = '/admin/pages/1'
+
+    it('returns proper path', (done) => {
+      expect(AdminRoutes.deletePagePath(1)).to.equal(expectedRoutePath)
+      done()
+    })
+  })
+})
