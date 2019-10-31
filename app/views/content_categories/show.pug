@@ -5,10 +5,11 @@ block content
   .b-content-category-description!= contentCategory.description
 
   if contents
-    .card-deck
-    each content in contents
-      .card.bg-light.mb-3.border-primary
-        .card-img-top.card-header 286x180
-        .card-body
-          h5.card-title= content.title
-          .card-text!= content.description
+    .card-deck.l-category-content
+      each content in contents
+        .b-category-content
+          .card.bg-light.mb-3.border-primary
+            .card-img-top.card-header 286x180
+            .card-body
+              h5.card-title= content.title
+              .card-text!= content.description
