@@ -9,6 +9,7 @@ class ContentCategoriesController {
       db.contentCategory.findByPk(id).then(contentCategory => {
         if (contentCategory === null) { throw new createError.NotFound() }
 
+        // TODO move it to ContentCategoryContentsController.index with pagination and REACT
         contentCategory.getContents().then(contents => {
           res.render('content_categories/show', { contentCategory, contents })
         }).catch(next)

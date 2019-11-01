@@ -5,11 +5,13 @@ block content
   .b-content-category-description!= contentCategory.description
 
   if contents
-    .card-deck.l-category-content
+    .card-deck.l-category-contents.mt-3
       each content in contents
         .b-category-content
           .card.bg-light.mb-3.border-primary
-            .card-img-top.card-header 286x180
+            .card-img-top.card-header.b-content-preview 286x180
             .card-body
               h5.card-title= content.title
               .card-text!= content.description
+            footer.card-footer
+              a.card-link(href=`${layoutRoutes.contentCategoryContentPath(contentCategory.id, content.id)}`) Read more

@@ -9,7 +9,7 @@ html(lang='en')
     header.l-page-header
       nav.h-page-navigation.navbar.navbar-expand-md.navbar-light
         .container
-          a.navbar-brand(href='/') Logo
+          a.navbar-brand(href=`${layoutRoutes.rootPath()}`) Logo
 
           button.navbar-toggler(type='button' data-toggle='collapse' data-target='#b-page-navigation', aria-controls='b-page-navigation')
             span(class='navbar-toggler-icon')
@@ -24,7 +24,7 @@ html(lang='en')
                   a.nav-link.dropdown-toggle#l-page-contents-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Content categories
                   .dropdown-menu(aria-labelledby='l-page-contents-dropdown')
                     each contentCategory in contentCategories
-                      a.dropdown-item(href=`/content-categories/${contentCategory.id}`)= contentCategory.title
+                      a.dropdown-item(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title
 
               li.nav-item
                 a.nav-link(href='/policy-and-privacy') Policy and Privacy
