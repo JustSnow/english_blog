@@ -1,7 +1,5 @@
 require('../stylesheets/admin.sass')
 
-require('jquery/dist/jquery.slim.min')
-
 require('bootstrap/js/src/util')
 require('bootstrap/js/src/tools/sanitizer')
 

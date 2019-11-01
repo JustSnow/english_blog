@@ -1,5 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   entry: {
@@ -66,5 +67,12 @@ module.exports = {
       chunkFilename: '[id].css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery/dist/jquery.slim.min',
+      jQuery: 'jquery/dist/jquery.slim.min',
+      'window.jQuery': 'jquery/dist/jquery.slim.min',
+      Popper: ['popper.js', 'default'],
+      Carousel: 'exports-loader?Carousel!bootstrap/js/src/carousel'
+    })
   ]
 }

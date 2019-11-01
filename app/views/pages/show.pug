@@ -1,5 +1,12 @@
 extends ../layouts/layout
 
+block breadcrumbs
+  nav.l-breadcrumbs(aria-label='breadcrumb')
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href=`${layoutRoutes.rootPath()}`) Home
+      li.breadcrumb-item.active(aria-current='page')= page.title
+
 block content
   h1= page.title
   .l-static-page-description

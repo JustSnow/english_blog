@@ -1,2 +1,15 @@
-h1= contentCategory.title
-h1= content.title
+extends ../layouts/layout
+
+block breadcrumbs
+  nav.l-breadcrumbs(aria-label='breadcrumb')
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href=`${layoutRoutes.rootPath()}`) Home
+      li.breadcrumb-item
+        a(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title
+      li.breadcrumb-item.active(aria-current='page')= content.title
+
+block content
+  h1= content.title
+
+  .l-content-description!= content.description

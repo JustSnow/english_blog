@@ -2,7 +2,7 @@ doctype html
 html(lang='en')
   head
     meta(charset='utf-8')
-    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
     title= title
     link(rel='stylesheet', href='/stylesheets/app.css')
   body
@@ -33,8 +33,27 @@ html(lang='en')
                 a.nav-link(href='/contacts') Contacts
 
     main.l-page-content
+      if contentCategories
+        .carousel.slide#l-content-categories-slider(data-ride='carousel')
+          .carousel-inner
+            each contentCategory in contentCategories
+              .carousel-item
+                img(src='./images/hero-banner.png' alt=`contentCategory.title`)
+                .carousel-caption
+                  h5= contentCategory.title
+                  .b-content-category-slider-description= contentCategory.description
+
+          a.carousel-control-prev(href='#l-content-categories-slider' role='button' data-slide='prev')
+            span.carousel-control-prev-icon(aria-hidden='true')
+            span.sr-only Previous
+
+          a.carousel-control-next(href='#l-content-categories-slider' role='button' data-slide='next')
+            span.carousel-control-next-icon(aria-hidden='true')
+            span.sr-only Next
+
       section.l-page-big-logo
 
+      block breadcrumbs
       block content
 
   script(src='/javascripts/app.js')
