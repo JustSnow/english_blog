@@ -1,0 +1,26 @@
+extends ../layouts/layout
+
+block content
+  if contentCategories
+    section.h-content-categories-slider
+      .carousel.slide#l-content-categories-slider(data-ride='carousel')
+        ol.carousel-indicators
+          - let index = 0
+          while index < contentCategories.length
+              li(data-target='#l-content-categories-slider' data-slide-to=`${index}` class=`${index == 0 ? 'active' : ''}`)
+              - index++
+        .carousel-inner
+          each contentCategory, index in contentCategories
+            .carousel-item(class=`${index == 0 ? 'active' : ''}`)
+              img.d-block.w-100(src='./images/hero-banner.png' alt=`${contentCategory.title}`)
+              .carousel-caption
+                h5= contentCategory.title
+                .b-content-category-slider-description= contentCategory.description
+
+        a.carousel-control-prev(href='#l-content-categories-slider' role='button' data-slide='prev')
+          span.carousel-control-prev-icon(aria-hidden='true')
+          span.sr-only Previous
+
+        a.carousel-control-next(href='#l-content-categories-slider' role='button' data-slide='next')
+          span.carousel-control-next-icon(aria-hidden='true')
+          span.sr-only Next

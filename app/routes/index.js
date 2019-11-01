@@ -18,7 +18,7 @@ function renderStaticPage(res, page) {
 
 /* GET home page. */
 router.get('/', (req, res, next) =>
-  res.render('index', { title: 'Express' })
+  res.render('pages/home')
 )
 router.get('/about', (req, res, next) => {
   getPageByAlias('about').then(page => {

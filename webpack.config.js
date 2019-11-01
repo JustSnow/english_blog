@@ -1,5 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
@@ -68,11 +69,28 @@ module.exports = {
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
     new webpack.ProvidePlugin({
-      $: 'jquery/dist/jquery.slim.min',
-      jQuery: 'jquery/dist/jquery.slim.min',
-      'window.jQuery': 'jquery/dist/jquery.slim.min',
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
       Carousel: 'exports-loader?Carousel!bootstrap/js/src/carousel'
+    }),
+    new CleanWebpackPlugin({
+      dry: true,
+      erbose: true
     })
-  ]
+  ],
+  resolve: {
+    extensions: [
+      '.js'
+    ],
+    alias: {
+      'jquery': 'jquery/dist/jquery.slim.min'
+    }
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 }
