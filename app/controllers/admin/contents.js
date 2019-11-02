@@ -100,6 +100,7 @@ class ContentsController {
       title: Joi.string(),
       alias: Joi.string(),
       description: Joi.string(),
+      shortDescription: Joi.string(),
       contentCategoryId: Joi.string().alphanum()
     })
   }

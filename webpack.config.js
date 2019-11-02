@@ -73,11 +73,12 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
-      Carousel: 'exports-loader?Carousel!bootstrap/js/src/carousel'
+      Carousel: 'exports-loader?Carousel!bootstrap/js/src/carousel',
+      Dropdown: 'exports-loader?Dropdown!bootstrap/js/src/dropdown'
     }),
     new CleanWebpackPlugin({
       dry: true,
-      erbose: true
+      verbose: true
     })
   ],
   resolve: {

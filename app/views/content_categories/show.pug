@@ -19,6 +19,6 @@ block content
             .card-img-top.card-header.b-content-preview 286x180
             .card-body
               h5.card-title= content.title
-              .card-text!= content.description
+              .card-text!= content.shortDescription
             footer.card-footer
               a.card-link(href=`${layoutRoutes.contentCategoryContentPath(contentCategory.id, content.id)}`) Read more

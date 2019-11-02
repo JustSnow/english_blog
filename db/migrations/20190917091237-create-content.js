@@ -14,6 +14,9 @@ module.exports = {
       alias: {
         type: Sequelize.STRING
       },
+      shortDescription: {
+        type: Sequelize.TEXT
+      },
       description: {
         type: Sequelize.TEXT
       },

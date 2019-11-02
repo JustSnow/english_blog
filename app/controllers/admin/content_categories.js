@@ -86,7 +86,8 @@ class ContentCategoriesController {
     return Joi.object().keys({
       title: Joi.string(),
       alias: Joi.string(),
-      description: Joi.string()
+      description: Joi.string(),
+      shortDescription: Joi.string()
     })
   }
 }

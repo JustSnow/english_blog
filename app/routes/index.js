@@ -30,8 +30,8 @@ router.get('/contacts', (req, res, next) => {
     renderStaticPage(res, page)
   }).catch(next)
 })
-router.get('/privacy-and-policy', (req, res, next) => {
-  getPageByAlias('privacy-and-policy').then(page => {
+router.get('/policy-and-privacy', (req, res, next) => {
+  getPageByAlias('policy-and-privacy').then(page => {
     renderStaticPage(res, page)
   }).catch(next)
 })

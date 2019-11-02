@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     alias: DataTypes.STRING,
     description: DataTypes.TEXT,
+    shortDescription: DataTypes.TEXT,
     contentCategoryId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {});

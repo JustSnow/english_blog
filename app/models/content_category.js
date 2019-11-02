@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   const contentCategory = sequelize.define('contentCategory', {
     title: DataTypes.STRING,
     alias: DataTypes.STRING,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    shortDescription: DataTypes.TEXT
   }, {
     tableName: 'content_categories'
   });

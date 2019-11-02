@@ -24,6 +24,11 @@ block content
         +contentCategorySelect(contentCategories, content.contentCategoryId)
 
     .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-short-description') Short description
+      .l-admin-page-form-input-wrapper
+        textarea.form-control.b-reach-text-editor#b-content-short-description(type='text' name='shortDescription')= content.shortDescription
+
+    .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
       .l-admin-page-form-input-wrapper
         textarea.form-control.b-reach-text-editor#b-content-description(type='text' name='description')= content.description

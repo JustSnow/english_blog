@@ -1,4 +1,4 @@
-import AdminRoutes from '../../../../app/routes/admin/helper'
+import AdminRoutes from '../../../../../app/routes/admin/helper'
 import chai from 'chai'
 
 const expect = chai.expect
