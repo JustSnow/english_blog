@@ -41,11 +41,13 @@ class UsersController {
     let done = finalhandler(req, res)
     const params = await UsersController._generateHashedPassword(req.body)
 
+    // TODO fix create with password
     try {
       db.user.create(params).then(user => {
         res.redirect(AdminRoutes.editUserPath(user.id))
       }).catch(error => {
-        console.log('error: ', error);
+        delete params.encryptedPassword
+        req.flash('error', error)
         res.render('admin/users/new', { params })
       })
     } catch(error) { done(error) }
@@ -64,7 +66,8 @@ class UsersController {
           res.redirect(AdminRoutes.editUserPath(user.id))
         }).catch(error => {
           let backURL = req.header('Referer') || AdminRoutes.editUserPath(user.id)
-          console.log('error: ', error);
+          delete params.encryptedPassword
+          req.flash('error', error)
           res.redirect(backURL)
         })
       }).catch(next)
@@ -90,12 +93,16 @@ class UsersController {
       lastName: Joi.string(),
       email: Joi.string(),
       role: Joi.string(),
-      password: Joi.string()
+      password: Joi.string(),
+      passwordConfirmation: Joi.string(),
     })
   }
 
   static async _generateHashedPassword(params) {
-    params.password = await db.user.generateHashedPassword(params.password)
+    if (params.passwordConfirmation && params.password == params.passwordConfirmation) {
+      params.encryptedPassword = await db.user.generateHashedPassword(params.password)
+    }
+
     return params
   }
 }

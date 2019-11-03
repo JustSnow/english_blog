@@ -10,13 +10,13 @@ function authenticateUser(email, password, done) {
     db.user.findOne({ where: { email: email } }).then(user => {
       if (user == null) { return done(null, false, { message: 'Incorrect email or password' }) }
 
-      bcrypt.compare(password, user.password).then(isEqual => {
+      bcrypt.compare(password, user.encryptedPassword).then(isEqual => {
         if (isEqual) {
           return done(null, user)
         } else {
           return done(null, false, { message: 'Wrong password' })
         }
-      })
+      }).catch(done)
     }).catch(done)
   } catch(error) {
     return done(error)

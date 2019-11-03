@@ -19,13 +19,34 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('admin', 'manager', 'user'),
       defaultValue: 'user'
     },
-    // TODO add proper length validation
-    // in db store hashed password with long length
-    password: {
+    encryptedPassword: {
       type: DataTypes.STRING,
-      allowNull:false,
+      allowNull:false
+    },
+    passwordConfirmation: {
+      type: DataTypes.VIRTUAL,
+      set: function (value) {
+        this.setDataValue('passwordConfirmation', value)
+      },
       validate: {
-        notEmpty: true
+        isPasswordsequal: function (value) {
+          if (value != this.password) {
+            throw new Error('Password and password confirmation should be equal')
+          }
+        }
+      }
+    },
+    password: {
+      type: DataTypes.VIRTUAL,
+      set: function (value) {
+        this.setDataValue('password', value)
+      },
+      validate:{
+        isLongEnough: function (value) {
+          if (this.passwordConfirmation && value.length < 5) {
+            throw new Error('Please choose a longer password. 5 characters at least')
+          }
+        }
       }
     }
   }, {});

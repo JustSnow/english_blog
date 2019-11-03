@@ -26,9 +26,12 @@ block content
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-user-password') Password
       .l-admin-page-form-input-wrapper
-        //- TODO show here unheshed password
-        //- or remove it from incoming params
-        input.form-control#b-user-password(type='password' name='password' value=`${user.password}`)
+        input.form-control#b-user-password(type='password' name='password')
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-user-password-confirmation') Password confirmation
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-user-password-confirmation(type='password' name='passwordConfirmation')
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label Role of user

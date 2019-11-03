@@ -8,11 +8,13 @@ class AdminAuthentificationController {
     res.render('admin/authentification/login')
   }
 
+  // TODO fix problem with success redirect. Evry time it uses general layout 
   static async authenticate(req, res, next) {
     passport.authenticate('local', {
       successRedirect: '/admin',
       failureRedirect: '/admin/login',
-      failureFlash: true
+      failureFlash: true,
+      successFlash: `You are now logged in!`
     })(req, res, next)
   }
 

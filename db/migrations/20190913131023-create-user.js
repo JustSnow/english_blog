@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 'user'
       },
-      password: {
+      encryptedPassword: {
         type: Sequelize.STRING,
         allowNull: false
       },

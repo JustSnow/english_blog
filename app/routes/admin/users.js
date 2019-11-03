@@ -10,7 +10,7 @@ router.get('/:id(\\d+)/edit', UsersController.edit)
 
 router.route('/')
   .get(UsersController.index)
-  .post(ValidateSchema().params(UsersController.permittedParams()), UsersController.create)
+  .post(ValidateSchema().body(UsersController.permittedParams()), UsersController.create)
 
 router.route('/:id(\\d+)')
   .put(UsersController.update)

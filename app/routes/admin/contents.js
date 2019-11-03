@@ -9,7 +9,7 @@ router.get('/:id(\\d+)/edit', ContentsController.edit)
 
 router.route('/')
   .get(ContentsController.index)
-  .post(ValidateSchema().params(ContentsController.permittedParams()), ContentsController.create)
+  .post(ValidateSchema().body(ContentsController.permittedParams()), ContentsController.create)
 
 router.route('/:id(\\d+)')
   .put(ContentsController.update)
