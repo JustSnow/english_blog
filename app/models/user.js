@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       validate:{
         isLongEnough: function (value) {
-          if (this.passwordConfirmation && value.length < 5) {
+          if (this.passwordConfirmation && value.toString().length < 5) {
             throw new Error('Please choose a longer password. 5 characters at least')
           }
         }

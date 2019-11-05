@@ -41,7 +41,6 @@ class UsersController {
     let done = finalhandler(req, res)
     const params = await UsersController._generateHashedPassword(req.body)
 
-    // TODO fix create with password
     try {
       db.user.create(params).then(user => {
         res.redirect(AdminRoutes.editUserPath(user.id))
