@@ -24,18 +24,25 @@ initPassportConfig(passport)
 app.set('views', path.join(__dirname, 'app/views'))
 app.set('view engine', 'pug')
 
+// should be above passport.initialize()
+// https://github.com/jaredhanson/passport/issues/14#issuecomment-4863459
+app.use(express.static(path.join(__dirname, 'public')))
+
 app.use(logger('common'))
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
 app.use(flash())
+
 app.use(session({
   secret: process.env.SESSION_SECRET || 'top-secret-session-value',
   resave: false,
   saveUninitialized: false
 }))
 app.use(passport.initialize())
-app.use(passport.session())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(passport.session({ pauseStream: true }))
+
 app.use(methodOverride((req, res) => {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
     // look in urlencoded POST bodies and delete it
