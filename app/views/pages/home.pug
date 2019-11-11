@@ -14,7 +14,8 @@ block content
             .carousel-item(class=`${index == 0 ? 'active' : ''}`)
               img.d-block.w-100(src='./images/hero-banner.png' alt=`${contentCategory.title}`)
               .carousel-caption
-                h5= contentCategory.title
+                h5
+                  a(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title
                 .b-content-category-slider-description= contentCategory.shortDescription
 
         a.carousel-control-prev(href='#l-content-categories-slider' role='button' data-slide='prev')

@@ -9,6 +9,7 @@ function applyLayoutVariables(req, res, next) {
   Promise.all([
     getContentCategories()
   ]).then(results => {
+    debugger
     res.locals.contentCategories = results[0]
     res.locals.layoutRoutes = LayoutRoutes
 
