@@ -1,15 +1,15 @@
 import finalhandler from 'finalhandler'
 import db from '../../models'
+import createError from 'http-errors'
 
 const passport = require('passport')
 
 class AdminAuthentificationController {
-  static async login(req, res, next) {
+  async login(req, res, next) {
     res.render('admin/authentification/login')
   }
 
-  // TODO fix problem with success redirect. Evry time it uses general layout 
-  static async authenticate(req, res, next) {
+  async authenticate(req, res, next) {
     passport.authenticate('local', {
       successRedirect: '/admin',
       failureRedirect: '/admin/login',
@@ -19,10 +19,18 @@ class AdminAuthentificationController {
   }
 
   // TODO use admin routes helper
-  static async logout(req, res, next) {
+  async logout(req, res, next) {
     req.logOut()
     res.redirect('/admin/login')
   }
+
+  isAuthentificated(req, res, next) {
+    if (req.isAuthenticated()) {
+      next()
+    } else {
+      throw new createError.Unauthorized()
+    }
+  }
 }
 
-export default AdminAuthentificationController
+export default new AdminAuthentificationController

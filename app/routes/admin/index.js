@@ -15,10 +15,10 @@ router.route('/login')
   .post(AdminAuthentificationController.authenticate)
 router.delete('/logout', AdminAuthentificationController.logout)
 
-router.use('/users', usersRouter)
-router.use('/content-categories', contentCategoriesRouter)
-router.use('/contents', contentsRouter)
-router.use('/pages', pagesRouter)
-router.use('\/$', UsersController.index)
+router.use('/users', AdminAuthentificationController.isAuthentificated, usersRouter)
+router.use('/content-categories', AdminAuthentificationController.isAuthentificated, contentCategoriesRouter)
+router.use('/contents', AdminAuthentificationController.isAuthentificated, contentsRouter)
+router.use('/pages', AdminAuthentificationController.isAuthentificated, pagesRouter)
+router.use('\/$', AdminAuthentificationController.isAuthentificated, UsersController.index)
 
 export default router
