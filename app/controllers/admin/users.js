@@ -97,6 +97,7 @@ class UsersController {
     })
   }
 
+  // TODO move to user model. generate password if provided password and confirmation
   static async _generateHashedPassword(params) {
     if (params.passwordConfirmation && params.password == params.passwordConfirmation) {
       params.encryptedPassword = await db.user.generateHashedPassword(params.password)

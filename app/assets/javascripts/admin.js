@@ -16,6 +16,10 @@ $(document).ready(() => {
   $('.b-reach-text-editor').each((index, element) => {
     // TODO: handle image uploading to server
     // https://www.froala.com/wysiwyg-editor/docs/concepts/image/upload
-    new FroalaEditor(element)
+    new FroalaEditor(element, {
+      imageUploadParam: 'image',
+      imageUploadURL: '/admin/uploads/editor-images',
+      imageUploadMethod: 'POST'
+    })
   })
 })
