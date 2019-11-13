@@ -6,15 +6,18 @@ import methodOverride from 'method-override'
 import morganBody from 'morgan-body'
 import initPassportConfig from './config/passport'
 
+const app = express()
+const session = require('express-session')
+const flash = require('express-flash')
+const dotenv = require('dotenv')
+
+dotenv.config({ path: path.resolve(__dirname, `./config/.env.${app.get('env')}`) })
+
 import adminRouter from './app/routes/admin/index'
 import indexRouter from './app/routes/index'
 
 import applyAdminVariables from './app/presenters/admin'
 import applyLayoutVariables from './app/presenters/layout'
-
-const app = express()
-const session = require('express-session')
-const flash = require('express-flash')
 
 const passport = require('passport')
 initPassportConfig(passport)
@@ -35,10 +38,15 @@ app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'top-secret-session-value',
+  store: new (require('connect-pg-simple')(session))({
+    conString: process.env.DATABASE_URL
+  }),
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }))
+// conString: 'pg://' + config.username + ':' + config.password + '@' + config.host + '/' + config.database
+
 app.use(passport.initialize())
 app.use(passport.session({ pauseStream: true }))
 

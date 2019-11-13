@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   user.generateHashedPassword = async (password) => {
-    return bcrypt.hash(password, (process.env.PASSWORD_SALT_LENGTH || 8))
+    return bcrypt.hash(password, (process.env.PASSWORD_SALT_LENGTH))
   }
 
   return user;
