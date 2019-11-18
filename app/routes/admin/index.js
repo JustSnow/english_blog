@@ -4,6 +4,7 @@ import usersRouter from './users'
 import contentCategoriesRouter from './content_categories'
 import contentsRouter from './contents'
 import pagesRouter from './pages'
+import uploadsRouter from './uploads'
 
 import UsersController from '../../controllers/admin/users'
 import AdminAuthentificationController from '../../controllers/admin/authentification'
@@ -19,6 +20,7 @@ router.use('/users', AdminAuthentificationController.isAuthentificated, usersRou
 router.use('/content-categories', AdminAuthentificationController.isAuthentificated, contentCategoriesRouter)
 router.use('/contents', AdminAuthentificationController.isAuthentificated, contentsRouter)
 router.use('/pages', AdminAuthentificationController.isAuthentificated, pagesRouter)
+router.use('/uploads', AdminAuthentificationController.isAuthentificated, uploadsRouter)
 router.use('\/$', AdminAuthentificationController.isAuthentificated, UsersController.index)
 
 export default router
