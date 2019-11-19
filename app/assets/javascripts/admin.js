@@ -12,7 +12,6 @@ import 'bootstrap/js/src/button'
 
 import FroalaEditor from 'froala-editor/js/froala_editor.pkgd.min'
 import 'froala-editor/js/plugins/image.min'
-import 'froala-editor/js/plugins/quick_insert.min'
 
 $(document).ready(() => {
   $('.b-reach-text-editor').each((index, element) => {
@@ -45,9 +44,6 @@ $(document).ready(() => {
           'buttonsVisible': 4
         }
       },
-      fontFamilySelection: true,
-      fontSizeSelection: true,
-      paragraphFormatSelection: true,
       imageInsertButtons: ['imageBack', '|', 'imageUpload'],
       imageUploadURL: '/admin/uploads/editor-image',
       events: {
