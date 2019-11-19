@@ -48,7 +48,7 @@ app.use(session({
 // conString: 'pg://' + config.username + ':' + config.password + '@' + config.host + '/' + config.database
 
 app.use(passport.initialize())
-app.use(passport.session({ pauseStream: true }))
+app.use(passport.session())
 
 app.use(methodOverride((req, res) => {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
