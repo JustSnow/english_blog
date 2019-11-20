@@ -19,15 +19,26 @@
 
 @import ~froala-editor/css/froala_editor.pkgd.min
 
+body
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+footer
+  margin-top: auto
+
+  .b-copyright
+    margin-top: 15px
+
+.l-admin-page-content, .l-admin-page-navigation, .l-footer-section
+  +make-container
+  +make-container-max-widths((xl: 960px))
+
 .h-admin-page
   +make-container
 
   .h-admin-page-navigation
     +make-row
-
-  .l-admin-page-content, .l-admin-page-navigation
-    +make-container
-    +make-container-max-widths((xl: 960px))
 
   // TODO move to separate partial
   .l-admin-page-form

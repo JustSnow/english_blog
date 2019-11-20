@@ -16,13 +16,26 @@
 @import ~bootstrap/scss/carousel
 @import ~bootstrap/scss/utilities
 
-.l-page-content, .h-page-navigation
+body
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+footer
+  margin-top: auto
+
+.l-page-content, .h-page-navigation, .l-footer-section
   +make-container
   +make-container-max-widths((xl: 960px))
 
 .h-page-navigation
   .navbar-toggler
     float: right
+
+.h-content-categories-slider
+  min-height: calc(100vh - 110px)
+  display: flex
+  align-items: center
 
 .l-breadcrumbs
   margin-top: 10px
@@ -37,3 +50,6 @@
     justify-content: center
     text-align: center
     flex-direction: column
+
+.b-copyright
+  margin-top: 15px
