@@ -68,6 +68,7 @@ class ContentsController {
     try {
       db.content.findByPk(id).then(content => {
         if (content === null) { throw new createError.NotFound() }
+        params.thumbnailPath = req.file.path.replace('public', '')
 
         content.update(params).then(content => {
           res.redirect(AdminRoutes.editContentPath(content.id))

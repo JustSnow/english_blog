@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT,
     shortDescription: DataTypes.TEXT,
     contentCategoryId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    thumbnailPath: DataTypes.STRING
   }, {});
   content.associate = function(models) {
     content.belongsTo(models.contentCategory, { foreignKey: 'contentCategoryId', as: 'contentCategory' })

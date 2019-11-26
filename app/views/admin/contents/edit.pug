@@ -6,8 +6,16 @@ block content
   h1 Edit content
 
   // TODO: try to reuse form from new action
-  form.l-admin-page-form(action=`${adminRoutes.updateContentPath(content.id)}` method='POST')
-    input(type='hidden' name='_method' value='PUT')
+  form.l-admin-page-form(action=`${adminRoutes.updateContentPath(content.id)}?_method=PUT` method='POST' enctype='multipart/form-data')
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label Thumbnail
+      .l-admin-page-form-input-wrapper
+        if content.thumbnailPath
+          img.img-thumbnail.rounded(src=`${content.thumbnailPath}` alt=`${content.title}`)
+
+        input.form-control(type='file' name='thumbnail')
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-title') Title
       .l-admin-page-form-input-wrapper
