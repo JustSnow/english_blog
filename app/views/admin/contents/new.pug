@@ -8,6 +8,11 @@ block content
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.createContentPath()}` method='POST' enctype='multipart/form-data')
     .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label Thumbnail
+      .l-admin-page-form-input-wrapper
+        input.form-control(type='file' name='thumbnail')
+
+    .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-title') Title
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-title(type='text' name='title')
@@ -23,14 +28,14 @@ block content
         +contentCategorySelect(contentCategories)
 
     .form-group.l-admin-page-form-row
-      label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
-      .l-admin-page-form-input-wrapper
-        textarea.form-control.b-reach-text-editor#b-content-description(type='text' name='description')
-
-    .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-short-description') Short description
       .l-admin-page-form-input-wrapper
         textarea.form-control.b-reach-text-editor#b-content-short-description(type='text' name='shortDescription')
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
+      .l-admin-page-form-input-wrapper
+        textarea.form-control.b-reach-text-editor#b-content-description(type='text' name='description')
 
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save

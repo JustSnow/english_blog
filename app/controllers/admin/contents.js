@@ -3,6 +3,7 @@ import db from '../../models'
 import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
 import createError from 'http-errors'
+import Uploader from '../../services/uploader'
 
 // TODO refactor me add dry with General CRUD class
 class ContentsController {
@@ -51,6 +52,11 @@ class ContentsController {
     const params = req.body
 
     try {
+      if (req.file) {
+        let thumbnailPath = req.file.path.replace('public', '')
+        params.thumbnailPath = thumbnailPath
+      }
+
       db.content.create(params).then(content => {
         res.redirect(AdminRoutes.editContentPath(content.id))
       }).catch(error => {
@@ -68,7 +74,13 @@ class ContentsController {
     try {
       db.content.findByPk(id).then(content => {
         if (content === null) { throw new createError.NotFound() }
-        params.thumbnailPath = req.file.path.replace('public', '')
+
+        if (req.file) {
+          let thumbnailPath = req.file.path.replace('public', '')
+          Uploader.compareFilePaths(content.thumbnailPath, thumbnailPath)
+
+          params.thumbnailPath = thumbnailPath
+        }
 
         content.update(params).then(content => {
           res.redirect(AdminRoutes.editContentPath(content.id))
