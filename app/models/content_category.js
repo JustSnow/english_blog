@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     alias: DataTypes.STRING,
     description: DataTypes.TEXT,
-    shortDescription: DataTypes.TEXT
+    shortDescription: DataTypes.TEXT,
+    thumbnailPath: DataTypes.STRING
   }, {
     tableName: 'content_categories'
   });

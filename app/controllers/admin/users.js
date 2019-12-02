@@ -40,7 +40,6 @@ class UsersController {
       db.user.create(params).then(user => {
         res.redirect(AdminRoutes.editUserPath(user.id))
       }).catch(error => {
-        debugger
         req.flash('error', error)
         res.render('admin/users/new', { params })
       })

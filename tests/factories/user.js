@@ -6,7 +6,6 @@ module.exports = (factory, Models) => {
     lastName: () => faker.name.findName(),
     email: () => faker.internet.email(),
     role: () => faker.random.arrayElement(Models.user.roleValues()),
-    password: '123456',
-    passwordConfirmation: '123456'
+    encryptedPassword: Models.user.generateHashedPassword('123456').then(password => { return password })
   })
 }

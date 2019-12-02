@@ -4,7 +4,15 @@ block content
   h1 Content category editor
 
   // TODO: try to reuse form from new action
-  form.l-admin-page-form(action=`${adminRoutes.updateContentCategoryPath(contentCategory.id)}?_method=PUT` method='POST')
+  form.l-admin-page-form(action=`${adminRoutes.updateContentCategoryPath(contentCategory.id)}?_method=PUT` method='POST' enctype='multipart/form-data')
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label Thumbnail
+      .l-admin-page-form-input-wrapper
+        if contentCategory.thumbnailPath
+          img.img-thumbnail.rounded(src=`${contentCategory.thumbnailPath}` alt=`${contentCategory.title}`)
+
+        input.form-control(type='file' name='thumbnail')
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-title') Title
       .l-admin-page-form-input-wrapper

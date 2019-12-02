@@ -3,7 +3,12 @@ extends ../../layouts/admin
 block content
   h1 New content category
 
-  form.l-admin-page-form(action=`${adminRoutes.createContentCategoryPath()}` method='POST')
+  form.l-admin-page-form(action=`${adminRoutes.createContentCategoryPath()}` method='POST' enctype='multipart/form-data')
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label Thumbnail
+      .l-admin-page-form-input-wrapper
+        input.form-control(type='file' name='thumbnail')
+
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-title') Title
       .l-admin-page-form-input-wrapper
