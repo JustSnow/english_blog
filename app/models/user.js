@@ -20,8 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'user'
     },
     encryptedPassword: {
-      type: DataTypes.STRING,
-      allowNull:false
+      type: DataTypes.STRING
     },
     passwordConfirmation: {
       type: DataTypes.VIRTUAL,
@@ -43,13 +42,23 @@ module.exports = (sequelize, DataTypes) => {
       },
       validate:{
         isLongEnough: function (value) {
-          if (this.passwordConfirmation && value.toString().length < 5) {
+          if (this.passwordConfirmation && value.toString().length <= 5) {
             throw new Error('Please choose a longer password. 5 characters at least')
           }
         }
       }
     }
-  }, {});
+  }, {
+    hooks: {
+      beforeSave: function (user, options) {
+        if (user.password && user.passwordConfirmation) {
+          return this.generateHashedPassword(user.password).then(hashedPassword => {
+            user.encryptedPassword = hashedPassword
+          })
+        }
+      }
+    }
+  });
 
   user.associate = function(models) {
     user.hasMany(models.content, { as: 'contents', onDelete: 'cascade', hooks: true })

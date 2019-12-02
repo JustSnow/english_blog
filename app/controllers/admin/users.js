@@ -1,4 +1,3 @@
-import finalhandler from 'finalhandler'
 import db from '../../models'
 import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
@@ -6,14 +5,12 @@ import createError from 'http-errors'
 
 // TODO fix problem with wrong id or if user doesn't exist in db (handle error for this)
 class UsersController {
-  static async index(req, res) {
-    let done = finalhandler(req, res)
-
+  static async index(req, res, next) {
     try {
       db.user.findAll().then(users => {
         res.render('admin/users/index', { users })
-      }).catch(error => { done(error) })
-    } catch (error) { done(error) }
+      }).catch(next)
+    } catch (error) { next(error) }
   }
 
   static async new(req, res) {
@@ -22,7 +19,6 @@ class UsersController {
   }
 
   static async edit(req, res, next) {
-    let done = finalhandler(req, res)
     const { id } = req.params
 
     try {
@@ -37,25 +33,23 @@ class UsersController {
     }
   }
 
-  static async create(req, res) {
-    let done = finalhandler(req, res)
-    const params = await UsersController._generateHashedPassword(req.body)
+  static async create(req, res, next) {
+    const params = req.body
 
     try {
       db.user.create(params).then(user => {
         res.redirect(AdminRoutes.editUserPath(user.id))
       }).catch(error => {
-        delete params.encryptedPassword
+        debugger
         req.flash('error', error)
         res.render('admin/users/new', { params })
       })
-    } catch(error) { done(error) }
+    } catch(error) { next(error) }
   }
 
   static async update(req, res, next) {
-    let done = finalhandler(req, res)
     const { id } = req.params
-    const params = await UsersController._generateHashedPassword(req.body)
+    const params = req.body
 
     try {
       db.user.findByPk(id).then(user => {
@@ -73,17 +67,16 @@ class UsersController {
     } catch(error) { next(error) }
   }
 
-  static async delete(req, res) {
-    let done = finalhandler(req, res)
+  static async delete(req, res, next) {
     const { id } = req.params
 
     try {
       db.user.findByPk(id).then(user => {
         user.destroy({ force: true }).then(user => {
           res.redirect(AdminRoutes.usersPath())
-        }).catch(error => { done(error) })
-      }).catch(error => { done(error) })
-    } catch(error) { done(error) }
+        }).catch(next)
+      }).catch(next)
+    } catch(error) { next(error) }
   }
 
   static permittedParams() {
@@ -95,15 +88,6 @@ class UsersController {
       password: Joi.string(),
       passwordConfirmation: Joi.string(),
     })
-  }
-
-  // TODO move to user model. generate password if provided password and confirmation
-  static async _generateHashedPassword(params) {
-    if (params.passwordConfirmation && params.password == params.passwordConfirmation) {
-      params.encryptedPassword = await db.user.generateHashedPassword(params.password)
-    }
-
-    return params
   }
 }
 
