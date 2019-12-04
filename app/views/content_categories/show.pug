@@ -1,5 +1,7 @@
 extends ../layouts/layout
 
+include ../mixins/images
+
 block breadcrumbs
   nav.l-breadcrumbs(aria-label='breadcrumb')
     ol.breadcrumb
@@ -13,12 +15,11 @@ block content
 
   if contents
     .card-deck.l-category-contents.mt-3
-      - // TODO move inline style image to mixin and handle case with empty or default image
-      - // add pug-loader https://github.com/pugjs/pug-loader
       each content in contents
         .b-category-content
           .card.bg-light.mb-3.border-primary
-            .card-img-top.card-header.b-content-preview(style=`background-image: url(${content.thumbnailPath}), background-size: cover, background-position: center`)
+            if content.thumbnailPath
+              +cardImage({ width: 230, height: 175, path: content.thumbnailPath })
             .card-body
               h5.card-title= content.title
               .card-text!= content.shortDescription

@@ -18,7 +18,6 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.0",
     "express-validate-schema": "^2.2.0",
-    "finalhandler": "^1.1.2",
     "froala-editor": "^3.0.6",
     "http-errors": "^1.7.3",
     "jquery": "^3.4.1",
@@ -33,6 +32,7 @@
     "pug": "^2.0.4",
     "sequelize": "^5.18.4",
     "sequelize-cli": "^5.5.1",
+    "sharp": "^0.23.3",
     "wysiwyg-editor-node-sdk": "^3.0.0-beta.1"
   },
   "devDependencies": {

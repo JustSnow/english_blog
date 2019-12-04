@@ -12,7 +12,10 @@ block content
         .carousel-inner
           each contentCategory, index in contentCategories
             .carousel-item(class=`${index == 0 ? 'active' : ''}`)
-              img.d-block.w-100(src='./images/hero-banner.png' alt=`${contentCategory.title}`)
+              if contentCategory.thumbnailPath
+                img.d-block.w-100(src=`${imageSrcBuilder({ width: 960, height: 600, path: contentCategory.thumbnailPath })}` alt=`${contentCategory.title}`)
+              else
+                .d-block.w-100.bg-secondary.b-empty-category-thumbnail
               .carousel-caption
                 h5
                   a(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title

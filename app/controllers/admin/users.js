@@ -5,7 +5,7 @@ import createError from 'http-errors'
 
 // TODO fix problem with wrong id or if user doesn't exist in db (handle error for this)
 class UsersController {
-  static async index(req, res, next) {
+  async index(req, res, next) {
     try {
       db.user.findAll().then(users => {
         res.render('admin/users/index', { users })
@@ -13,12 +13,12 @@ class UsersController {
     } catch (error) { next(error) }
   }
 
-  static async new(req, res) {
+  async new(req, res) {
     let roleValues = db.user.roleValues()
     res.render('admin/users/new', { roleValues })
   }
 
-  static async edit(req, res, next) {
+  async edit(req, res, next) {
     const { id } = req.params
 
     try {
@@ -33,7 +33,7 @@ class UsersController {
     }
   }
 
-  static async create(req, res, next) {
+  async create(req, res, next) {
     const params = req.body
 
     try {
@@ -46,7 +46,7 @@ class UsersController {
     } catch(error) { next(error) }
   }
 
-  static async update(req, res, next) {
+  async update(req, res, next) {
     const { id } = req.params
     const params = req.body
 
@@ -66,7 +66,7 @@ class UsersController {
     } catch(error) { next(error) }
   }
 
-  static async delete(req, res, next) {
+  async delete(req, res, next) {
     const { id } = req.params
 
     try {
@@ -78,7 +78,7 @@ class UsersController {
     } catch(error) { next(error) }
   }
 
-  static permittedParams() {
+  permittedParams() {
     return Joi.object().keys({
       firstName: Joi.string(),
       lastName: Joi.string(),
@@ -90,4 +90,4 @@ class UsersController {
   }
 }
 
-export default UsersController
+export default new UsersController

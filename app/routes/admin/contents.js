@@ -6,8 +6,8 @@ import Uploader from '../../services/uploader'
 const router = Router()
 const thumbsPath = './public/uploads/contents/'
 
-router.get('/new', ContentsController.new)
-router.get('/:id(\\d+)/edit', ContentsController.edit)
+router.get('/new', (...args) => ContentsController.new(...args))
+router.get('/:id(\\d+)/edit', (...args) => ContentsController.edit(...args))
 
 router.route('/')
   .get(ContentsController.index)

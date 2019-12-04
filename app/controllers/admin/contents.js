@@ -1,4 +1,3 @@
-import finalhandler from 'finalhandler'
 import db from '../../models'
 import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
@@ -7,32 +6,28 @@ import Uploader from '../../services/uploader'
 
 // TODO refactor me add dry with General CRUD class
 class ContentsController {
-  static async index(req, res) {
-    let done = finalhandler(req, res)
-
+  async index(req, res, next) {
     try {
       db.content.findAll().then(contents => {
         res.render('admin/contents/index', { contents })
-      }).catch(done)
-    } catch (error) { done(error) }
+      }).catch(next)
+    } catch (error) { next(error) }
   }
 
-  static async new(req, res) {
-    let contentCategories = ContentsController._getContentCategories()
-    let done = finalhandler(req, res)
+  async new(req, res, next) {
+    let contentCategories = this._getContentCategories()
 
     contentCategories.then(contentCategories => {
       res.render('admin/contents/new', { contentCategories })
-    }).catch(done)
+    }).catch(next)
   }
 
-  static async edit(req, res, next) {
-    let done = finalhandler(req, res)
+  async edit(req, res, next) {
     const { id } = req.params
 
     try {
       let content = db.content.findByPk(id)
-      let contentCategories = ContentsController._getContentCategories()
+      let contentCategories = this._getContentCategories()
 
       Promise.all([
         content,
@@ -47,8 +42,7 @@ class ContentsController {
     }
   }
 
-  static async create(req, res) {
-    let done = finalhandler(req, res)
+  async create(req, res, next) {
     const params = req.body
 
     try {
@@ -60,14 +54,13 @@ class ContentsController {
       db.content.create(params).then(content => {
         res.redirect(AdminRoutes.editContentPath(content.id))
       }).catch(error => {
-        console.log('error: ', error);
+        req.flash('error', error)
         res.render('admin/contents/new', { params })
       })
-    } catch(error) { done(error) }
+    } catch(error) { next(error) }
   }
 
-  static async update(req, res, next) {
-    let done = finalhandler(req, res)
+  async update(req, res, next) {
     const { id } = req.params
     const params = req.body
 
@@ -86,29 +79,28 @@ class ContentsController {
           res.redirect(AdminRoutes.editContentPath(content.id))
         }).catch(error => {
           let backURL = req.header('Referer') || AdminRoutes.editContentPath(content.id)
-          console.log('error: ', error);
+          req.flash('error', error)
           res.redirect(backURL)
         })
       }).catch(next)
     } catch(error) { next(error) }
   }
 
-  static async delete(req, res) {
-    let done = finalhandler(req, res)
+  async delete(req, res, next) {
     const { id } = req.params
 
     try {
       db.content.findByPk(id).then(content => {
         content.destroy({ force: true }).then(content => {
           res.redirect(AdminRoutes.contentsPath())
-        }).catch(done)
-      }).catch(done)
-    } catch(error) { done(error) }
+        }).catch(next)
+      }).catch(next)
+    } catch(error) { next(error) }
   }
 
   // TODO: be sure contentCategoryId was passed with params
   // required() breaks all
-  static permittedParams() {
+  permittedParams() {
     return Joi.object().keys({
       title: Joi.string(),
       alias: Joi.string(),
@@ -118,9 +110,9 @@ class ContentsController {
     })
   }
 
-  static _getContentCategories(fields = ['id', 'title']) {
+  _getContentCategories(fields = ['id', 'title']) {
     return db.contentCategory.findAll({ attributes:  fields})
   }
 }
 
-export default ContentsController
+export default new ContentsController
