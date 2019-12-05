@@ -1,9 +1,13 @@
 extends ../../layouts/admin
 
 include ../mixins/content_category_select
+include ../mixins/errors
 
 block content
   h1 New content
+
+  if messages.error
+    +printErrors(messages.error)
 
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.createContentPath()}` method='POST' enctype='multipart/form-data')
@@ -15,27 +19,27 @@ block content
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-title') Title
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-title(type='text' name='title')
+        input.form-control#b-content-title(type='text' name='title' value=`${params.title || ''}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-alias') Alias
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-alias(type='text' name='alias')
+        input.form-control#b-content-alias(type='text' name='alias' value=`${params.alias || ''}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category') Content category
       .l-admin-page-form-input-wrapper
-        +contentCategorySelect(contentCategories)
+        +contentCategorySelect(contentCategories, params.contentCategoryId)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-short-description') Short description
       .l-admin-page-form-input-wrapper
-        textarea.form-control.b-reach-text-editor#b-content-short-description(type='text' name='shortDescription')
+        textarea.form-control.b-reach-text-editor#b-content-short-description(type='text' name='shortDescription')= params.shortDescription
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-description') Description
       .l-admin-page-form-input-wrapper
-        textarea.form-control.b-reach-text-editor#b-content-description(type='text' name='description')
+        textarea.form-control.b-reach-text-editor#b-content-description(type='text' name='description')= params.description
 
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save

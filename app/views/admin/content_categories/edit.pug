@@ -9,7 +9,7 @@ block content
       label.col-form-label.l-admin-page-form-label Thumbnail
       .l-admin-page-form-input-wrapper
         if contentCategory.thumbnailPath
-          img.img-thumbnail.rounded(src=`${contentCategory.thumbnailPath}` alt=`${contentCategory.title}`)
+          img.img-thumbnail.rounded.float-left.mb-1(src=`${imageSrcBuilder({ width: 300, height: 300, path: contentCategory.thumbnailPath })}` alt=`${contentCategory.title}`)
 
         input.form-control(type='file' name='thumbnail')
 

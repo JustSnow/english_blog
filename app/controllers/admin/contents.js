@@ -18,7 +18,7 @@ class ContentsController {
     let contentCategories = this._getContentCategories()
 
     contentCategories.then(contentCategories => {
-      res.render('admin/contents/new', { contentCategories })
+      res.render('admin/contents/new', { contentCategories, params: {} })
     }).catch(next)
   }
 
@@ -54,12 +54,13 @@ class ContentsController {
       db.content.create(params).then(content => {
         res.redirect(AdminRoutes.editContentPath(content.id))
       }).catch(error => {
-        req.flash('error', error)
+        req.flash('error', error.errors)
         res.render('admin/contents/new', { params })
       })
     } catch(error) { next(error) }
   }
 
+  // TODO investingate how provide further in edit values form fields when validation failed
   async update(req, res, next) {
     const { id } = req.params
     const params = req.body
@@ -79,7 +80,7 @@ class ContentsController {
           res.redirect(AdminRoutes.editContentPath(content.id))
         }).catch(error => {
           let backURL = req.header('Referer') || AdminRoutes.editContentPath(content.id)
-          req.flash('error', error)
+          req.flash('error', error.errors)
           res.redirect(backURL)
         })
       }).catch(next)

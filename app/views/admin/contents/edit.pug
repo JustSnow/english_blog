@@ -1,9 +1,13 @@
 extends ../../layouts/admin
 
 include ../mixins/content_category_select
+include ../mixins/errors
 
 block content
   h1 Edit content
+
+  if messages.error
+    +printErrors(messages.error)
 
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.updateContentPath(content.id)}?_method=PUT` method='POST' enctype='multipart/form-data')
@@ -12,7 +16,7 @@ block content
       label.col-form-label.l-admin-page-form-label Thumbnail
       .l-admin-page-form-input-wrapper
         if content.thumbnailPath
-          img.img-thumbnail.rounded(src=`${content.thumbnailPath}` alt=`${content.title}`)
+          img.img-thumbnail.rounded.float-left.mb-1(src=`${imageSrcBuilder({ width: 300, height: 300, path: content.thumbnailPath })}` alt=`${content.title}`)
 
         input.form-control(type='file' name='thumbnail')
 
