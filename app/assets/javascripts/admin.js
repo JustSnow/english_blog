@@ -12,8 +12,14 @@ import 'bootstrap/js/src/button'
 
 import FroalaEditor from 'froala-editor/js/froala_editor.pkgd.min'
 import 'froala-editor/js/plugins/image.min'
+import MenuActiveItem from '../../services/menu_active_item'
 
 $(document).ready(() => {
+  $('.l-admin-page-navigation').each((_, element) => {
+    let menu = new MenuActiveItem({ element })
+    menu.handle()
+  })
+
   $('.b-reach-text-editor').each((index, element) => {
     new FroalaEditor(element, {
       toolbarButtons: {

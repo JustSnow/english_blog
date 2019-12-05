@@ -17,16 +17,16 @@ html(lang='en')
           .collapse.navbar-collapse#b-admin-page-navigation
             ul.navbar-nav.mr-auto
               - // TODO handle active menu item
-              li.nav-item.active
+              li.nav-item.active(data-path='content-categories')
                 a.nav-link(href=`${adminRoutes.contentCategoriesPath()}`) Content Categories
 
-              li.nav-item
+              li.nav-item(data-path='contents')
                 a.nav-link(href=`${adminRoutes.contentsPath()}`) Contents
 
-              li.nav-item
+              li.nav-item(data-path='users')
                 a.nav-link(href=`${adminRoutes.usersPath()}`) Users
 
-              li.nav-item
+              li.nav-item(data-path='pages')
                 a.nav-link(href=`${adminRoutes.pagesPath()}`) Static pages
 
             form.form-inline.my-2.my-lg-0(action='/admin/logout?_method=DELETE' method='POST')

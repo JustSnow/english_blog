@@ -5,6 +5,7 @@ const path = require('path')
 class ImagesScaler {
   // TODO firstly check either image exist or not
   // if exist return existed one, if no schedule resize and return resized from stream
+  // add white list of dimensions - width, height
   resize(imageOptions = {}) {
     let imagePath = path.join('public', imageOptions.path)
     const readStream = fs.createReadStream(imagePath)
