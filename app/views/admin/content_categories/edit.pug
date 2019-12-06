@@ -1,7 +1,12 @@
 extends ../../layouts/admin
 
+include ../mixins/errors
+
 block content
   h1 Content category editor
+
+  if messages.error
+    +printErrors(messages.error)
 
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.updateContentCategoryPath(contentCategory.id)}?_method=PUT` method='POST' enctype='multipart/form-data')

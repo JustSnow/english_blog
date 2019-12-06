@@ -1,9 +1,13 @@
 extends ../../layouts/admin
 
 include ../mixins/user_role_select
+include ../mixins/errors
 
 block content
   h1 User editor
+
+  if messages.error
+    +printErrors(messages.error)
 
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.updateUserPath(user.id)}?_method=PUT` method='POST')

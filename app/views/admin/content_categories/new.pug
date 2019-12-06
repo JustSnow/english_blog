@@ -1,7 +1,12 @@
 extends ../../layouts/admin
 
+include ../mixins/errors
+
 block content
   h1 New content category
+
+  if messages.error
+    +printErrors(messages.error)
 
   form.l-admin-page-form(action=`${adminRoutes.createContentCategoryPath()}` method='POST' enctype='multipart/form-data')
     .form-group.l-admin-page-form-row
@@ -12,22 +17,22 @@ block content
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-title') Title
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-title(type='text' name='title')
+        input.form-control#b-content-category-title(type='text' name='title' value=`${params.title || ''}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-alias') Alias
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-alias(type='text' name='alias')
+        input.form-control#b-content-category-alias(type='text' name='alias' value=`${params.alias || ''}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-short-description') Short description
       .l-admin-page-form-input-wrapper
-        textarea.form-control.b-reach-text-editor#b-content-category-short-description(type='text' name='shortDescription')
+        textarea.form-control.b-reach-text-editor#b-content-category-short-description(type='text' name='shortDescription')= params.shortDescription
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-description') Description
       .l-admin-page-form-input-wrapper
-        textarea.form-control.b-reach-text-editor#b-content-category-description(type='text' name='description')
+        textarea.form-control.b-reach-text-editor#b-content-category-description(type='text' name='description')= params.description
 
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save

@@ -14,7 +14,7 @@ class PagesController {
   }
 
   async new(req, res) {
-    res.render('admin/pages/new')
+    res.render('admin/pages/new', { params: {} })
   }
 
   async edit(req, res, next) {
@@ -26,11 +26,10 @@ class PagesController {
 
         res.render('admin/pages/edit', { page })
       }).catch(next)
-    } catch (error) {
-      next(error)
-    }
+    } catch (error) { next(error) }
   }
 
+  // TODO store current user
   async create(req, res, next) {
     const params = req.body
 
@@ -38,12 +37,14 @@ class PagesController {
       db.page.create(params).then(page => {
         res.redirect(AdminRoutes.editPagePath(page.id))
       }).catch(error => {
-        req.flash('error', error)
+        req.flash('error', error.errors)
         res.render('admin/pages/new', { params })
       })
     } catch(error) { next(error) }
   }
 
+  // TODO investingate how provide further in edit values form fields when validation failed
+  // TODO store current user
   async update(req, res, next) {
     const { id } = req.params
     const params = req.body
@@ -56,7 +57,7 @@ class PagesController {
           res.redirect(AdminRoutes.editPagePath(page.id))
         }).catch(error => {
           let backURL = req.header('Referer') || AdminRoutes.editPagePath(page.id)
-          req.flash('error', error)
+          req.flash('error', error.errors)
           res.redirect(backURL)
         })
       }).catch(next)

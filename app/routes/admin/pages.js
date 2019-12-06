@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import PagesController from '../../controllers/admin/pages'
-import ValidateSchema from 'express-validate-schema'
 
 const router = Router()
 
@@ -9,7 +8,7 @@ router.get('/:id(\\d+)/edit', PagesController.edit)
 
 router.route('/')
   .get(PagesController.index)
-  .post(ValidateSchema().body(PagesController.permittedParams()), PagesController.create)
+  .post(PagesController.create)
 
 router.route('/:id(\\d+)')
   .put(PagesController.update)

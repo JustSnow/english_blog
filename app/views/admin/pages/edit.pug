@@ -1,7 +1,12 @@
 extends ../../layouts/admin
 
+include ../mixins/errors
+
 block content
   h1 Static page editor
+
+  if messages.error
+    +printErrors(messages.error)
 
   // TODO: try to reuse form from new action
   form.l-admin-page-form(action=`${adminRoutes.updatePagePath(page.id)}?_method=PUT` method='POST')

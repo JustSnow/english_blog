@@ -39,7 +39,18 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    contentCategoryId: DataTypes.INTEGER,
+    contentCategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Please choose content category'
+        },
+        notEmpty: {
+          msg: 'You have to choose one content category at least'
+        }
+      }
+    },
     userId: DataTypes.INTEGER,
     thumbnailPath: DataTypes.STRING
   }, {});

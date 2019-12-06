@@ -15,7 +15,7 @@ class ContentCategoriesController {
   }
 
   async new(req, res) {
-    res.render('admin/content_categories/new')
+    res.render('admin/content_categories/new', { params: {} })
   }
 
   async edit(req, res, next) {
@@ -32,6 +32,7 @@ class ContentCategoriesController {
     }
   }
 
+  // TODO store current user
   async create(req, res, next) {
     const params = req.body
 
@@ -44,12 +45,14 @@ class ContentCategoriesController {
       db.contentCategory.create(params).then(contentCategory => {
         res.redirect(AdminRoutes.editContentCategoryPath(contentCategory.id))
       }).catch(error => {
-        req.flash('error', error)
+        req.flash('error', error.errors)
         res.render('admin/content_categories/new', { params })
       })
     } catch(error) { next(error) }
   }
 
+  // TODO investingate how provide further in edit values form fields when validation failed
+  // TODO store current user
   async update(req, res, next) {
     const { id } = req.params
     const params = req.body
@@ -69,7 +72,7 @@ class ContentCategoriesController {
           res.redirect(AdminRoutes.editContentCategoryPath(contentCategory.id))
         }).catch(error => {
           let backURL = req.header('Referer') || AdminRoutes.editContentCategoryPath(contentCategory.id)
-          req.flash('error', error)
+          req.flash('error', error.errors)
           res.redirect(backURL)
         })
       }).catch(next)

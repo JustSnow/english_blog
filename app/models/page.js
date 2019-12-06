@@ -1,9 +1,31 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const page = sequelize.define('page', {
-    title: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Please enter page title'
+        },
+        notEmpty: {
+          msg: "Page's title can't be empty"
+        }
+      }
+    },
     alias: DataTypes.STRING,
-    description: DataTypes.TEXT
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Please enter page description'
+        },
+        notEmpty: {
+          msg: "Page's description can't be empty"
+        }
+      }
+    }
   }, {});
   page.associate = function(models) {
   };

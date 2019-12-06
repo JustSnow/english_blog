@@ -1,23 +1,28 @@
 extends ../../layouts/admin
 
+include ../mixins/errors
+
 block content
   h1 New static page
+
+  if messages.error
+    +printErrors(messages.error)
 
   form.l-admin-page-form(action=`${adminRoutes.createPagePath()}` method='POST')
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-page-title') Title
       .l-admin-page-form-input-wrapper
-        input.form-control#b-page-title(type='text' name='title')
+        input.form-control#b-page-title(type='text' name='title' value=`${params.title || ''}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-page-alias') Alias
       .l-admin-page-form-input-wrapper
-        input.form-control#b-page-alias(type='text' name='alias')
+        input.form-control#b-page-alias(type='text' name='alias' value=`${params.alias || ''}`)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-page-description') Description
       .l-admin-page-form-input-wrapper
-        textarea.form-control.b-reach-text-editor#b-page-description(type='text' name='description')
+        textarea.form-control.b-reach-text-editor#b-page-description(type='text' name='description')= params.description
 
     .form-group.l-admin-page-form-row
       button.btn.btn-success(type='submit') Save

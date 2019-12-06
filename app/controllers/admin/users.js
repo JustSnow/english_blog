@@ -15,7 +15,7 @@ class UsersController {
 
   async new(req, res) {
     let roleValues = db.user.roleValues()
-    res.render('admin/users/new', { roleValues })
+    res.render('admin/users/new', { roleValues, params: {} })
   }
 
   async edit(req, res, next) {
@@ -34,6 +34,7 @@ class UsersController {
   }
 
   async create(req, res, next) {
+    let roleValues = db.user.roleValues()
     const params = req.body
 
     try {
@@ -41,7 +42,7 @@ class UsersController {
         res.redirect(AdminRoutes.editUserPath(user.id))
       }).catch(error => {
         req.flash('error', error)
-        res.render('admin/users/new', { params })
+        res.render('admin/users/new', { roleValues, params })
       })
     } catch(error) { next(error) }
   }

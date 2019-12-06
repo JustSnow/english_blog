@@ -42,6 +42,7 @@ class ContentsController {
     }
   }
 
+  // TODO store current user
   async create(req, res, next) {
     const params = req.body
 
@@ -61,6 +62,7 @@ class ContentsController {
   }
 
   // TODO investingate how provide further in edit values form fields when validation failed
+  // TODO store current user
   async update(req, res, next) {
     const { id } = req.params
     const params = req.body
