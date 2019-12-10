@@ -10,6 +10,7 @@ const expect = chai.expect
 const factory = mochaHelper.factory
 const Models = mochaHelper.Models
 const app = mochaHelper.app
+const bcrypt = require('bcrypt')
 
 describe('User model', () => {
   describe('validation', () => {
@@ -89,6 +90,53 @@ describe('User model', () => {
               done()
             }).catch(error => { done(error.message) })
           })
+        })
+      })
+    })
+  })
+
+  describe('hooks', () => {
+    describe('beforeSave', () => {
+      let user
+
+      context('when password and passwordConfirmation were not provided', () => {
+        beforeEach((done) => {
+          factory.build('user', {
+            password: '',
+            passwordConfirmation: '',
+            encryptedPassword: ''
+          }).then(buildedUser => {
+            user = buildedUser
+          }).finally(done)
+        })
+
+        it('should not encrypt password', (done) => {
+          user.save().then(model => {
+            expect(model.encryptedPassword).to.be.empty
+            done()
+          }).catch(error => { done(error.message) })
+        })
+      })
+
+      context('when password and passwordConfirmation were provided', () => {
+        let password = '112233445566'
+
+        beforeEach((done) => {
+          factory.build('user', {
+            password: password,
+            passwordConfirmation: password
+          }).then(buildedUser => {
+            user = buildedUser
+          }).finally(done)
+        })
+
+        it('should generate hashed password', (done) => {
+          user.save().then(model => {
+            bcrypt.compare(password, model.encryptedPassword).then(isEqual => {
+              expect(isEqual).to.be.true
+              done()
+            }).catch(error => { done(error.message) })
+          }).catch(error => { done(error.message) })
         })
       })
     })

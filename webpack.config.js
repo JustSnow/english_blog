@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: './app/assets/javascripts/app.js',
     admin: './app/assets/javascripts/admin.js',
