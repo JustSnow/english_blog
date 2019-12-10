@@ -44,7 +44,7 @@ router.get('/scale/images', (req, res, next) => {
   const imageOptions = JSON.parse(decodedOptions)
 
   res.type(`image/${imageOptions.format || 'jpeg'}`)
-  ImagesScaler.resize(imageOptions).pipe(res)
+  ImagesScaler.resize(imageOptions, next).pipe(res)
 })
 
 router.use('/content-categories', contentCategoriesRouter)

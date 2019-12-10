@@ -1,3 +1,5 @@
+import createError from 'http-errors'
+
 const sharp = require('sharp')
 const fs = require('fs')
 const path = require('path')
@@ -5,20 +7,27 @@ const path = require('path')
 class ImagesScaler {
   // TODO firstly check either image exist or not
   // if exist return existed one, if no schedule resize and return resized from stream
-  // add white list of dimensions - width, height
-  resize(imageOptions = {}) {
-    let imagePath = path.join('public', imageOptions.path)
-    const readStream = fs.createReadStream(imagePath)
-    let transform = sharp()
-    let format = imageOptions.format
-    let width, height
-
-    if (imageOptions.width) {
-      width = parseInt(imageOptions.width)
+  resize(imageOptions = {}, callback) {
+    if (!imageOptions.path) {
+      throw new createError.NotFound()
     }
 
-    if (imageOptions.height) {
-      height = parseInt(imageOptions.height)
+    const allowedImageOptions = this.filterImageOptions(imageOptions)
+    const imagePath = path.join('public', allowedImageOptions.path)
+    const readStream = fs.createReadStream(imagePath)
+
+    readStream.on('error', callback)
+
+    let transform = sharp()
+    let format = allowedImageOptions.format
+    let width, height
+
+    if (allowedImageOptions.width) {
+      width = parseInt(allowedImageOptions.width)
+    }
+
+    if (allowedImageOptions.height) {
+      height = parseInt(allowedImageOptions.height)
     }
 
     if (format) {
@@ -30,6 +39,22 @@ class ImagesScaler {
     }
 
     return readStream.pipe(transform)
+  }
+
+  allowedOptions() {
+    return ['width', 'height', 'path', 'format']
+  }
+
+  filterImageOptions(imageOptions = {}) {
+    let allowedImageOptions = {}
+
+    this.allowedOptions().forEach(option => {
+      if (imageOptions[option]) {
+        Object.assign(allowedImageOptions, { [option]: imageOptions[option] })
+      }
+    })
+
+    return allowedImageOptions
   }
 }
 
