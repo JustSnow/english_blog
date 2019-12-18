@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 
 import { Strategy } from 'passport-local'
 import db from '../app/models'
+import createError from 'http-errors'
 
 function authenticateUser(email, password, done) {
   let incorrectAuthDataResponse = 'Incorrect email or password'
@@ -10,6 +11,11 @@ function authenticateUser(email, password, done) {
   try {
     db.user.findOne({ where: { email: email } }).then(user => {
       if (user == null) { return done(null, false, { message: incorrectAuthDataResponse }) }
+
+      if (!user.isAdmin() && !user.isManager()) {
+        let err = new createError.Unauthorized()
+        return done(null, false, { message: err.message })
+      }
 
       bcrypt.compare(password, user.encryptedPassword).then(isEqual => {
         if (isEqual) {

@@ -8,7 +8,7 @@ import Uploader from '../../services/uploader'
 class ContentsController {
   async index(req, res, next) {
     try {
-      db.content.findAll().then(contents => {
+      db.content.findAll({ order: [['id', 'DESC']] }).then(contents => {
         res.render('admin/contents/index', { contents })
       }).catch(next)
     } catch (error) { next(error) }

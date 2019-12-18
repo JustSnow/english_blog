@@ -65,12 +65,22 @@ module.exports = (sequelize, DataTypes) => {
     user.hasMany(models.contentCategory, { as: 'contentCategories', onDelete: 'cascade', hooks: true })
   };
 
+  // Class methods
   user.roleValues = () => {
     return user.rawAttributes.role.values
   }
 
   user.generateHashedPassword = async (password) => {
     return bcrypt.hash(password, parseInt(process.env.PASSWORD_SALT_LENGTH))
+  }
+
+  // Instance methods
+  user.prototype.isAdmin = function () {
+    return this.role == 'admin'
+  }
+
+  user.prototype.isManager = function() {
+    return this.role == 'manager'
   }
 
   return user;
