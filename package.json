@@ -6,7 +6,8 @@
     "start": "nodemon --exec babel-node --inspect ./bin/www",
     "test": "NODE_ENV=test mocha --debug --recursive --require @babel/register tests/scenarios --retries 2 --exit",
     "assets-watch": "webpack --watch",
-    "seeds": "sequelize-cli db:seed:all"
+    "seeds": "sequelize-cli db:seed:all",
+    "clean-assets": "rm -rf public/javascripts/* public/stylesheets/*"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

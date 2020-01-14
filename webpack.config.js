@@ -92,7 +92,15 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      minChunks: 2,
+      cacheGroups: {
+        node_vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'async',
+          priority: 1
+        }
+      }
     }
   }
 }

@@ -14,7 +14,12 @@ class ImagesScaler {
     const readStream = fs.createReadStream(imagePath)
 
     if (!imageOptions.path) { this.throwError() }
-    // if (!this.isAllowedImageStore(imagePath)) { this.throwError() }
+
+    let storage = safeImageOptions.possibleImageStores.find(storage => imagePath.includes(storage))
+
+    if (Object.is(storage, undefined)) { this.throwError() }
+
+    let storageName = this.getImageConfigBranchName(storage)
 
     readStream.on('error', callback)
 
@@ -23,11 +28,11 @@ class ImagesScaler {
     let width, height
 
     if (allowedImageOptions.width) {
-      width = parseInt(allowedImageOptions.width)
+      width = this.findAllowedWidth(parseInt(allowedImageOptions.width), storageName)
     }
 
     if (allowedImageOptions.height) {
-      height = parseInt(allowedImageOptions.height)
+      height = this.findAllowedHeight(parseInt(allowedImageOptions.height), storageName)
     }
 
     if (format) {
@@ -36,13 +41,8 @@ class ImagesScaler {
 
     if (width || height) {
       transform = transform.resize(width, height)
-      // debugger
-      // if (this.isAllowedWidth(width) && this.isAllowedHeight(height)) {
-      //   debugger
-      //   transform = transform.resize(width, height)
-      // } else {
-      //   this.throwError()
-      // }
+    } else {
+      this.throwError()
     }
 
     return readStream.pipe(transform)
@@ -64,57 +64,26 @@ class ImagesScaler {
     return allowedImageOptions
   }
 
-  isAllowedImageStore(path) {
-    let allowed = false
-
-    safeImageOptions.possibleImageStores.forEach(storage => {
-      if (path.includes(storage)) {
-        this.saveImageConfigBranchName(storage)
-        allowed = true
-      }
-    })
-
-    return allowed
+  findAllowedWidth(width, storageName) {
+    return safeImageOptions[storageName].widths.find(allowedWidth => allowedWidth == width)
   }
 
-  isAllowedWidth(width) {
-    let allowed = false
-
-    safeImageOptions[storageName].widths.forEach(allowedWidth => {
-      if (allowedWidth == width) {
-        allowed = true
-      }
-    })
-
-    return allowed
-  }
-
-  isAllowedHeight(height) {
-    let allowed = false
-
-    safeImageOptions[storageName].heights.forEach(allowedHeight => {
-      if (allowedWidth == height) {
-        allowed = true
-      }
-    })
-
-    return allowed
+  findAllowedHeight(height, storageName) {
+    return safeImageOptions[storageName].heights.find(allowedHeight => allowedHeight == height)
   }
 
   throwError() {
     throw new createError.NotFound()
   }
 
-  saveImageConfigBranchName(storage) {
-    debugger
-    // TODO use here class property
+  getImageConfigBranchName(storage) {
     switch (storage) {
       case 'contents':
-        storageName = 'content'
+        return 'content'
       case 'content-categories':
-        storageName = 'contentCategory'
+        return 'contentCategory'
       default:
-        throwError()
+        return this.throwError()
     }
   }
 }
