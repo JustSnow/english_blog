@@ -1,5 +1,7 @@
 'use strict';
 
+import SequelizeSlugify from 'sequelize-slugify'
+
 module.exports = (sequelize, DataTypes) => {
   const content = sequelize.define('content', {
     title: {
@@ -14,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    alias: DataTypes.STRING,
+    alias: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -54,9 +59,16 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     thumbnailPath: DataTypes.STRING
   }, {});
+
+  SequelizeSlugify.slugifyModel(content, {
+    source: ['title'],
+    column: 'alias'
+  });
+
   content.associate = function(models) {
     content.belongsTo(models.contentCategory, { foreignKey: 'contentCategoryId', as: 'contentCategory' })
     content.belongsTo(models.user, { as: 'user' })
   };
+
   return content;
 };

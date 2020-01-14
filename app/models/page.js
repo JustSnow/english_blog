@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const page = sequelize.define('page', {
     title: {
@@ -13,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    alias: DataTypes.STRING,
+    alias: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -27,7 +31,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {});
-  page.associate = function(models) {
-  };
+
+  page.associate = function(models) {};
+
   return page;
 };

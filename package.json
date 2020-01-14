@@ -33,6 +33,7 @@
     "pug": "^2.0.4",
     "sequelize": "^5.18.4",
     "sequelize-cli": "^5.5.1",
+    "sequelize-slugify": "^0.9.1",
     "sharp": "^0.23.3",
     "wysiwyg-editor-node-sdk": "^3.0.0-beta.1"
   },
