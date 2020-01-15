@@ -1,6 +1,9 @@
 'use strict';
 
 import SequelizeSlugify from 'sequelize-slugify'
+import sanitizeConfig from '../../config/sanitize.js'
+
+const sanitizeHtml = require('sanitize-html')
 
 module.exports = (sequelize, DataTypes) => {
   const content = sequelize.define('content', {
@@ -58,7 +61,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: DataTypes.INTEGER,
     thumbnailPath: DataTypes.STRING
-  }, {});
+  }, {
+    hooks: {
+      beforeSave: function (content, options) {
+        if (content.changed('shortDescription')) {
+          content.shortDescription = sanitizeHtml(content.shortDescription, sanitizeConfig)
+        }
+
+        if (content.changed('description')) {
+          content.description = sanitizeHtml(content.description, sanitizeConfig)
+        }
+      }
+    }
+  });
 
   SequelizeSlugify.slugifyModel(content, {
     source: ['title'],

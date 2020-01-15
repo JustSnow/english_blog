@@ -1,5 +1,9 @@
 'use strict';
 
+import sanitizeConfig from '../../config/sanitize.js'
+
+const sanitizeHtml = require('sanitize-html')
+
 module.exports = (sequelize, DataTypes) => {
   const page = sequelize.define('page', {
     title: {
@@ -30,7 +34,15 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
-  }, {});
+  }, {
+    hooks: {
+      beforeSave: function (page, options) {
+        if (page.changed('description')) {
+          page.description = sanitizeHtml(page.description, sanitizeConfig)
+        }
+      }
+    }
+  });
 
   page.associate = function(models) {};
 
