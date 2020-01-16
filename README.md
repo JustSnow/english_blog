@@ -7,7 +7,6 @@ write flow how to prepare databases
 create database
 
 # Session store
-
 `psql mydatabase < node_modules/connect-pg-simple/table.sql`
 
 ```
@@ -19,3 +18,6 @@ CREATE TABLE "session" (
 WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 ```
+# Images
+use `sharp` - https://github.com/lovell/sharp
+for this library need to install additional package - https://sharp.pixelplumbing.com/en/stable/install/

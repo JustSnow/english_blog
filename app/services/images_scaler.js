@@ -8,6 +8,7 @@ const safeImageOptions = require(path.relative(__dirname, 'config/allowed_image_
 class ImagesScaler {
   // TODO firstly check either image exist or not
   // if exist return existed one, if no schedule resize and return resized from stream
+  // Change image's sizes to versions, just provide path and version like (path, 'contents/show_page')
   resize(imageOptions = {}, callback) {
     const allowedImageOptions = this.filterImageOptions(imageOptions)
     const imagePath = path.join('public', allowedImageOptions.path)
