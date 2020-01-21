@@ -5,6 +5,7 @@ import sanitizeConfig from '../../config/sanitize.js'
 
 const sanitizeHtml = require('sanitize-html')
 
+// TODO think about sanitization of all attributes or save them as raw string
 module.exports = (sequelize, DataTypes) => {
   const content = sequelize.define('content', {
     title: {

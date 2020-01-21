@@ -8,8 +8,6 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 const factory = mochaHelper.factory
-const Models = mochaHelper.Models
-const app = mochaHelper.app
 const bcrypt = require('bcrypt')
 
 describe('User model', () => {

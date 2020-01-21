@@ -2,6 +2,7 @@
 
 const bcrypt = require('bcrypt')
 
+// TODO think about sanitization of all attributes or save them as raw string
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
     firstName: DataTypes.STRING,
@@ -42,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       validate:{
         isLongEnough: function (value) {
-          if (this.passwordConfirmation && value.toString().length <= 5) {
+          if (this.passwordConfirmation && value.toString().length < 5) {
             throw new Error('Please choose a longer password. 5 characters at least')
           }
         }
