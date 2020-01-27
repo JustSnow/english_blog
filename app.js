@@ -7,6 +7,7 @@ import morganBody from 'morgan-body'
 import initPassportConfig from './config/passport'
 
 const app = express()
+const helmet = require('helmet')
 const session = require('express-session')
 const flash = require('express-flash')
 const dotenv = require('dotenv')
@@ -22,6 +23,17 @@ import applyLayoutVariables from './app/presenters/layout'
 const passport = require('passport')
 initPassportConfig(passport)
 
+app.use(helmet())
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    styleSrc: ["'self'"],
+    scriptSrc: ["'self'", "'unsafe-eval'"],
+    imgSrc: ["'self'", 'data:'],
+    upgradeInsecureRequests: true
+  }
+}))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'))
 app.set('view engine', 'pug')
@@ -30,7 +42,11 @@ app.set('view engine', 'pug')
 // https://github.com/jaredhanson/passport/issues/14#issuecomment-4863459
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use(logger('common'))
+app.use(logger('common', {
+  skip: (req, res) => {
+    return process.env.NODE_ENV === 'test'
+  }
+}))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -53,7 +69,9 @@ app.use(passport.session())
 // TODO add every where to form query param - _method
 app.use(methodOverride('_method'))
 
-morganBody(app, { logResponseBody: false })
+if (process.env.NODE_ENV != 'test'){
+  morganBody(app, { logResponseBody: false })
+}
 
 app.use('/', applyLayoutVariables, indexRouter)
 app.use('/admin', applyAdminVariables, adminRouter)

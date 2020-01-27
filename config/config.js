@@ -13,7 +13,8 @@ module.exports = {
     'password': null,
     'database': 'english_blog_test',
     'host': '127.0.0.1',
-    'dialect': 'postgres'
+    'dialect': 'postgres',
+    'logging': false
   },
   'production': {
     database: process.env.DB_NAME,
