@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node --inspect ./bin/www",
-    "test": "NODE_ENV=test mocha --debug --recursive --require @babel/register tests/scenarios --retries 2 --exit",
+    "test": "NODE_ENV=test mocha inspect --recursive --require @babel/register tests/scenarios --retries 2 --exit",
     "assets-watch": "webpack --watch",
     "seeds": "sequelize-cli db:seed:all",
     "clean-assets": "rm -rf public/javascripts/* public/stylesheets/*"

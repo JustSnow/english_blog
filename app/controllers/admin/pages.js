@@ -7,7 +7,7 @@ import createError from 'http-errors'
 class PagesController {
   async index(req, res, next) {
     try {
-      db.page.findAll().then(pages => {
+      db.page.findAll({ order: [['id', 'DESC']] }).then(pages => {
         res.render('admin/pages/index', { pages })
       }).catch(next)
     } catch (error) { next(error) }

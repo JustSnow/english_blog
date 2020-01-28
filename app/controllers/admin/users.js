@@ -7,7 +7,7 @@ import createError from 'http-errors'
 class UsersController {
   async index(req, res, next) {
     try {
-      db.user.findAll().then(users => {
+      db.user.findAll({ order: [['id', 'DESC']] }).then(users => {
         res.render('admin/users/index', { users })
       }).catch(next)
     } catch (error) { next(error) }
