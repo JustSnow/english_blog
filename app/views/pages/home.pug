@@ -19,7 +19,7 @@ block content
               .carousel-caption
                 h5
                   a(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title
-                .b-content-category-slider-description= contentCategory.shortDescription
+                .b-content-category-slider-description!= contentCategory.shortDescription
 
         a.carousel-control-prev(href='#l-content-categories-slider' role='button' data-slide='prev')
           span.carousel-control-prev-icon(aria-hidden='true')

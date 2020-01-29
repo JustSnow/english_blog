@@ -1,4 +1,3 @@
-import finalhandler from 'finalhandler'
 import db from '../../models'
 import createError from 'http-errors'
 
