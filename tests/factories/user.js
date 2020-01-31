@@ -7,5 +7,10 @@ module.exports = (factory, Models) => {
     email: () => faker.internet.email(),
     role: () => faker.random.arrayElement(Models.user.roleValues()),
     encryptedPassword: Models.user.generateHashedPassword('123456').then(password => { return password })
-  })
+  });
+
+  factory.extend('user', 'admin', {
+    role: 'admin',
+    email: 'admin@admin.com'
+  });
 }
