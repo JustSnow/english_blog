@@ -7,12 +7,12 @@ class ContentCategoryContentsController {
   }
 
   static async show(req, res) {
-    const { contentCategoryId, id } = req.params
+    const { contentCategoryAlias, alias } = req.params
 
-    db.contentCategory.findByPk(contentCategoryId).then(contentCategory => {
+    db.contentCategory.findOne({ where: { alias: contentCategoryAlias } }).then(contentCategory => {
       if (contentCategory === null) { throw new createError.NotFound() }
 
-      contentCategory.getContents({ where: { id: id } }).then(contents => {
+      contentCategory.getContents({ where: { alias } }).then(contents => {
         const content = contents[0]
 
         if (content === null) { throw new createError.NotFound() }

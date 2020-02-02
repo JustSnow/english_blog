@@ -18,7 +18,7 @@ block content
                 .d-block.w-100.bg-secondary.b-empty-category-thumbnail
               .carousel-caption
                 h5
-                  a(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title
+                  a(href=`${layoutRoutes.contentCategoryPath(contentCategory.alias)}`)= contentCategory.title
                 .b-content-category-slider-description!= contentCategory.shortDescription
 
         a.carousel-control-prev(href='#l-content-categories-slider' role='button' data-slide='prev')

@@ -24,7 +24,7 @@ html(lang='en')
                   a.nav-link.dropdown-toggle#l-page-contents-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Content categories
                   .dropdown-menu(aria-labelledby='l-page-contents-dropdown')
                     each contentCategory in contentCategories
-                      a.dropdown-item(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title
+                      a.dropdown-item(href=`${layoutRoutes.contentCategoryPath(contentCategory.alias)}`)= contentCategory.title
 
               li.nav-item(data-path='policy-and-privacy')
                 a.nav-link(href='/policy-and-privacy') Policy and Privacy

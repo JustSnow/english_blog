@@ -7,6 +7,7 @@
     "test": "NODE_ENV=test mocha inspect --recursive --require @babel/register tests/scenarios --retries 2 --exit",
     "assets-watch": "webpack --watch",
     "seeds": "sequelize-cli db:seed:all",
+    "setup-db": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "clean-assets": "rm -rf public/javascripts/* public/stylesheets/*"
   },
   "dependencies": {

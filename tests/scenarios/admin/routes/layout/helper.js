@@ -14,19 +14,19 @@ describe('Layout routes', () => {
   })
 
   describe('.contentCategoryPath', () => {
-    let expectedRoutePath = '/content-categories/1'
+    let expectedRoutePath = '/content-categories/test-alias'
 
     it('returns proper path', (done) => {
-      expect(LayoutRoutes.contentCategoryPath(1)).to.equal(expectedRoutePath)
+      expect(LayoutRoutes.contentCategoryPath('test-alias')).to.equal(expectedRoutePath)
       done()
     })
   })
 
   describe('.contentCategoryContentPath', () => {
-    let expectedRoutePath = '/content-categories/1/contents/2'
+    let expectedRoutePath = '/content-categories/test-alias/contents/test-alias'
 
     it('returns proper path', (done) => {
-      expect(LayoutRoutes.contentCategoryContentPath(1, 2)).to.equal(expectedRoutePath)
+      expect(LayoutRoutes.contentCategoryContentPath('test-alias', 'test-alias')).to.equal(expectedRoutePath)
       done()
     })
   })

@@ -6,7 +6,7 @@ block breadcrumbs
       li.breadcrumb-item
         a(href=`${layoutRoutes.rootPath()}`) Home
       li.breadcrumb-item
-        a(href=`${layoutRoutes.contentCategoryPath(contentCategory.id)}`)= contentCategory.title
+        a(href=`${layoutRoutes.contentCategoryPath(contentCategory.alias)}`)= contentCategory.title
       li.breadcrumb-item.active(aria-current='page')= content.title
 
 block content

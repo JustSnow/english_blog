@@ -3,12 +3,12 @@ class LayoutRoutes {
     return '/'
   }
 
-  static contentCategoryPath(contentCategoryId) {
-    return `/content-categories/${contentCategoryId}`
+  static contentCategoryPath(contentCategoryAlias) {
+    return `/content-categories/${contentCategoryAlias}`
   }
 
-  static contentCategoryContentPath(contentCategoryId, contentId) {
-    return `/content-categories/${contentCategoryId}/contents/${contentId}`
+  static contentCategoryContentPath(contentCategoryAlias, contentAlias) {
+    return `/content-categories/${contentCategoryAlias}/contents/${contentAlias}`
   }
 }
 

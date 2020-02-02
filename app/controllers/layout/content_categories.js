@@ -3,10 +3,10 @@ import createError from 'http-errors'
 
 class ContentCategoriesController {
   static async show(req, res, next) {
-    const { id } = req.params
+    const { alias } = req.params
 
     try {
-      db.contentCategory.findByPk(id).then(contentCategory => {
+      db.contentCategory.findOne({ where: { alias } }).then(contentCategory => {
         if (contentCategory === null) { throw new createError.NotFound() }
 
         // TODO move it to ContentCategoryContentsController.index with pagination and REACT

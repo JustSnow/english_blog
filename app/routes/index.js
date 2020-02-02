@@ -2,6 +2,7 @@ import db from '../models'
 import createError from 'http-errors'
 import contentCategoriesRouter from './layout/content_categories'
 import ImagesScaler from '../services/images_scaler'
+import ContentCategoryContentsController from '../controllers/layout/content_category_contents'
 
 import { Router } from 'express'
 
@@ -47,6 +48,7 @@ router.get('/scale/images', (req, res, next) => {
   ImagesScaler.resize(imageOptions, next).pipe(res)
 })
 
+router.use('/content-categories/:contentCategoryAlias(\[a-zA-Z]*|\-*|\S|\d*)/contents/:alias(\[a-zA-Z]*|\-*|\S|\d*)$', ContentCategoryContentsController.show)
 router.use('/content-categories', contentCategoriesRouter)
 
 export default router

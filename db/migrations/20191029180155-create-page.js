@@ -13,7 +13,8 @@ module.exports = {
       },
       alias: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       description: {
         allowNull: false,
@@ -29,7 +30,9 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       }
-    });
+    }).then(() => {
+      queryInterface.addIndex('pages', ['alias'])
+    })
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('pages');

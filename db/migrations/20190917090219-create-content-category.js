@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       alias: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       shortDescription: {
         type: Sequelize.TEXT
@@ -42,6 +43,7 @@ module.exports = {
       }
     }).then(() => {
       queryInterface.addIndex('content_categories', ['userId'])
+      queryInterface.addIndex('content_categories', ['alias'])
     })
   },
   down: (queryInterface, Sequelize) => {
