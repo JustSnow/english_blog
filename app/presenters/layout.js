@@ -3,7 +3,7 @@ import LayoutRoutes from '../routes/layout/helper'
 import imageSrcBuilder from '../services/image_src_builder'
 
 function getContentCategories() {
-  return db.contentCategory.findAll()
+  return db.contentCategory.scope('published', 'featured').findAll()
 }
 
 function applyLayoutVariables(req, res, next) {

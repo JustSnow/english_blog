@@ -28,6 +28,10 @@ module.exports = {
           key: 'id'
         }
       },
+      published: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
       contentCategoryId: {
         type: Sequelize.INTEGER,
         allowNull: false

@@ -52,6 +52,14 @@ module.exports = (sequelize, DataTypes) => {
     thumbnailPath: DataTypes.STRING
   }, {
     tableName: 'content_categories',
+    scopes: {
+      published: {
+        where: { published: true }
+      },
+      featured: {
+        where: { featured: true }
+      }
+    },
     hooks: {
       beforeSave: function (contentCategory, options) {
         if (contentCategory.changed('shortDescription')) {

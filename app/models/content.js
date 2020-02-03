@@ -63,6 +63,11 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     thumbnailPath: DataTypes.STRING
   }, {
+    scopes: {
+      published: {
+        where: { published: true }
+      }
+    },
     hooks: {
       beforeSave: function (content, options) {
         if (content.changed('shortDescription')) {

@@ -11,7 +11,7 @@ block content
         th(scope='col') #
         th(scope='col') Name
         th(scope='col') Alias
-        th(scope='col') Description
+        th(scope='col') Short Description
         th(scope='col') Actions
     tbody
       if contentCategories
@@ -20,7 +20,7 @@ block content
             th(scope='row')= contentCategory.id
             td= contentCategory.title
             td= contentCategory.alias
-            td= contentCategory.description
+            td= contentCategory.shortDescription
             td
               .btn-group(role='group' aria-label='Content category actions')
                 // use js to move button out of form for see proper styles to be applied to group of buttons

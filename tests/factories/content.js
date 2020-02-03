@@ -7,6 +7,7 @@ module.exports = (factory, Models) => {
     description: () => faker.lorem.sentence(150),
     shortDescription: () => faker.lorem.sentence(15),
     contentCategoryId: factory.assoc('contentCategory', 'id'),
-    userId: factory.assoc('user', 'id')
+    userId: factory.assoc('user', 'id'),
+    published: () => faker.random.boolean()
   })
 }

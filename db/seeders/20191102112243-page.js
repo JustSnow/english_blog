@@ -8,7 +8,7 @@ module.exports = {
     let pages = []
 
     aliases.forEach((alias) => {
-      pages.push(factory.attrs('page', { alias: alias }))
+      pages.push(factory.attrs('page', { alias }))
     })
 
     return new Promise((resolve) => {

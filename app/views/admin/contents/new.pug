@@ -22,11 +22,6 @@ block content
         input.form-control#b-content-title(type='text' name='title' value=`${params.title || ''}`)
 
     .form-group.l-admin-page-form-row
-      label.col-form-label.l-admin-page-form-label(for='b-content-alias') Alias
-      .l-admin-page-form-input-wrapper
-        input.form-control#b-content-alias(type='text' name='alias' value=`${params.alias || ''}`)
-
-    .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category') Content category
       .l-admin-page-form-input-wrapper
         +contentCategorySelect(contentCategories, params.contentCategoryId)

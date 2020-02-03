@@ -5,6 +5,8 @@ module.exports = (factory, Models) => {
     title: () => faker.name.title(),
     alias: () => faker.lorem.slug(),
     description: () => faker.lorem.sentence(150),
-    shortDescription: () => faker.lorem.sentence(15)
+    shortDescription: () => faker.lorem.sentence(15),
+    published: () => faker.random.boolean(),
+    featured: () => faker.random.boolean()
   })
 }

@@ -31,6 +31,14 @@ module.exports = {
       thumbnailPath: {
         type: Sequelize.STRING
       },
+      published: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
+      featured: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
