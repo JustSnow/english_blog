@@ -16,7 +16,7 @@ block content
     tbody
       if contents
         each content in contents
-          tr
+          tr(class=`${content.published ? '' : 'bg-not-published'}`)
             th(scope='row')= content.id
             td= content.title
             td= content.alias

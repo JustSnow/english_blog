@@ -6,8 +6,7 @@ module.exports = {
     'password': null,
     'database': 'english_blog_development',
     'host': '127.0.0.1',
-    'dialect': 'postgres',
-    "logging": true
+    'dialect': 'postgres'
   },
   'test': {
     'username': 'postgres',

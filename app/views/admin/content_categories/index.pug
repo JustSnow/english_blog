@@ -16,7 +16,7 @@ block content
     tbody
       if contentCategories
         each contentCategory in contentCategories
-          tr
+          tr(class=`${contentCategory.published ? '' : 'bg-not-published'}`)
             th(scope='row')= contentCategory.id
             td= contentCategory.title
             td= contentCategory.alias

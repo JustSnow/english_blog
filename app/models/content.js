@@ -61,7 +61,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     userId: DataTypes.INTEGER,
-    thumbnailPath: DataTypes.STRING
+    thumbnailPath: DataTypes.STRING,
+    published: DataTypes.BOOLEAN
   }, {
     scopes: {
       published: {

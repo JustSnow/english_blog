@@ -49,7 +49,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     userId: DataTypes.INTEGER,
-    thumbnailPath: DataTypes.STRING
+    thumbnailPath: DataTypes.STRING,
+    published: DataTypes.BOOLEAN,
+    featured: DataTypes.BOOLEAN
   }, {
     tableName: 'content_categories',
     scopes: {

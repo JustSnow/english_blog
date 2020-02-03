@@ -29,6 +29,16 @@ block content
         input.form-control#b-content-category-alias(type='text' name='alias' value=`${contentCategory.alias}` readonly)
 
     .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-category-published') Published
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-content-category-published(type='checkbox' name='published' value='true' checked=contentCategory.published)
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-category-featured') Featured
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-content-category-featured(type='checkbox' name='featured' value='true' checked=contentCategory.featured)
+
+    .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-short-description') Short description
       .l-admin-page-form-input-wrapper
         textarea.form-control.b-reach-text-editor#b-content-category-short-description(type='text' name='shortDescription')= contentCategory.shortDescription

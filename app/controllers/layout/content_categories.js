@@ -10,7 +10,7 @@ class ContentCategoriesController {
         if (contentCategory === null) { throw new createError.NotFound() }
 
         // TODO move it to ContentCategoryContentsController.index with pagination and REACT
-        contentCategory.getContents().scope('published').then(contents => {
+        contentCategory.getContents({ where: { published: true } }).then(contents => {
           res.render('content_categories/show', { contentCategory, contents })
         }).catch(next)
       }).catch(next)
