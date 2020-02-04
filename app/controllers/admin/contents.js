@@ -1,5 +1,4 @@
 import db from '../../models'
-import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
 import createError from 'http-errors'
 import Uploader from '../../services/uploader'
@@ -104,13 +103,6 @@ class ContentsController {
   // TODO: be sure contentCategoryId was passed with params
   // required() breaks all
   permittedParams() {
-    return Joi.object().keys({
-      title: Joi.string(),
-      alias: Joi.string(),
-      description: Joi.string(),
-      shortDescription: Joi.string(),
-      contentCategoryId: Joi.string().alphanum()
-    })
   }
 
   _getContentCategories(fields = ['id', 'title']) {

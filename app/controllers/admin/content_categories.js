@@ -1,8 +1,9 @@
 import db from '../../models'
-import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
 import createError from 'http-errors'
 import Uploader from '../../services/uploader'
+
+const { checkSchema } = require('express-validator')
 
 // TODO refactor me add dry with General CRUD class
 class ContentCategoriesController {
@@ -92,11 +93,17 @@ class ContentCategoriesController {
   }
 
   permittedParams() {
-    return Joi.object().keys({
-      title: Joi.string(),
-      alias: Joi.string(),
-      description: Joi.string(),
-      shortDescription: Joi.string()
+    return checkSchema({
+      title: {
+        isEmpty: false,
+        errorMessage: 'test'
+      },
+      published: {
+        toBoolean: true
+      },
+      featured: {
+        toBoolean: true
+      }
     })
   }
 }

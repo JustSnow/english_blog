@@ -1,5 +1,4 @@
 import db from '../../models'
-import Joi from 'joi'
 import AdminRoutes from '../../routes/admin/helper'
 import createError from 'http-errors'
 
@@ -80,14 +79,6 @@ class UsersController {
   }
 
   permittedParams() {
-    return Joi.object().keys({
-      firstName: Joi.string(),
-      lastName: Joi.string(),
-      email: Joi.string(),
-      role: Joi.string(),
-      password: Joi.string(),
-      passwordConfirmation: Joi.string(),
-    })
   }
 }
 
