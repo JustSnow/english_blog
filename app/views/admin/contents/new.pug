@@ -10,7 +10,7 @@ block content
     +printErrors(messages.error)
 
   // TODO: try to reuse form from new action
-  form.l-admin-page-form(action=`${adminRoutes.createContentPath()}` method='POST' enctype='multipart/form-data')
+  form.l-admin-page-form(action=adminRoutes.createContentPath() method='POST' enctype='multipart/form-data')
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label Thumbnail
       .l-admin-page-form-input-wrapper
@@ -25,6 +25,11 @@ block content
       label.col-form-label.l-admin-page-form-label(for='b-content-category') Content category
       .l-admin-page-form-input-wrapper
         +contentCategorySelect(contentCategories, params.contentCategoryId)
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-published') Published
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-content-published(type='checkbox' name='published' value='true' checked)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-short-description') Short description

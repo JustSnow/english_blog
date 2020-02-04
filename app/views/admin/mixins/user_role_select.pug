@@ -1,4 +1,4 @@
 mixin userRolesSelect(roles, selectedValue = null)
   select.l-user-roles-select.form-control(name='role')
     each role in roles
-      option(value=`${role}` selected=(role == selectedValue))= role
+      option(value=role selected=(role == selectedValue))= role

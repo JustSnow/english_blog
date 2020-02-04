@@ -3,7 +3,7 @@ import AdminRoutes from '../../routes/admin/helper'
 import createError from 'http-errors'
 import Uploader from '../../services/uploader'
 
-const { checkSchema } = require('express-validator')
+const { checkSchema, validationResult } = require('express-validator')
 
 // TODO refactor me add dry with General CRUD class
 class ContentCategoriesController {
@@ -92,17 +92,36 @@ class ContentCategoriesController {
     } catch(error) { next(error) }
   }
 
+  // TODO investingate validation
   permittedParams() {
     return checkSchema({
       title: {
         isEmpty: false,
-        errorMessage: 'test'
+        errorMessage: 'Please enter content category title',
+        trim: true
+      },
+      alias: {
+        optional: true,
+        trim: true
+      },
+      description: {
+        isEmpty: false,
+        errorMessage: 'Please enter content category description',
+        trim: true
+      },
+      shortDescription: {
+        isEmpty: false,
+        errorMessage: 'Please enter content category short description',
+        trim: true
       },
       published: {
         toBoolean: true
       },
       featured: {
         toBoolean: true
+      },
+      thumbnailPath: {
+        optional: { options: { nullable: true } }
       }
     })
   }

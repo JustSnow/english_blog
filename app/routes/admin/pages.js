@@ -8,10 +8,10 @@ router.get('/:id(\\d+)/edit', PagesController.edit)
 
 router.route('/')
   .get(PagesController.index)
-  .post(PagesController.create)
+  .post(PagesController.permittedParams(), PagesController.create)
 
 router.route('/:id(\\d+)')
-  .put(PagesController.update)
+  .put(PagesController.permittedParams(), PagesController.update)
   .delete(PagesController.delete)
 
 export default router

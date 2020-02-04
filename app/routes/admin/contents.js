@@ -10,10 +10,10 @@ router.get('/:id(\\d+)/edit', (...args) => ContentsController.edit(...args))
 
 router.route('/')
   .get(ContentsController.index)
-  .post(Uploader.singleUpload(thumbsPath, 'thumbnail'), ContentsController.create)
+  .post(Uploader.singleUpload(thumbsPath, 'thumbnail'), ContentsController.permittedParams(), ContentsController.create)
 
 router.route('/:id(\\d+)')
-  .put(Uploader.singleUpload(thumbsPath, 'thumbnail'), ContentsController.update)
+  .put(Uploader.singleUpload(thumbsPath, 'thumbnail'), ContentsController.permittedParams(), ContentsController.update)
   .delete(ContentsController.delete)
 
 export default router

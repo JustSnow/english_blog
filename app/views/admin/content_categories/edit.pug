@@ -14,19 +14,19 @@ block content
       label.col-form-label.l-admin-page-form-label Thumbnail
       .l-admin-page-form-input-wrapper
         if contentCategory.thumbnailPath
-          img.img-thumbnail.rounded.float-left.mb-1(src=`${imageSrcBuilder({ width: 300, height: 300, path: contentCategory.thumbnailPath })}` alt=`${contentCategory.title}`)
+          img.img-thumbnail.rounded.float-left.mb-1(src=`${imageSrcBuilder({ width: 300, height: 300, path: contentCategory.thumbnailPath })}` alt=contentCategory.title)
 
         input.form-control(type='file' name='thumbnail')
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-title') Title
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-title(type='text' name='title' value=`${contentCategory.title}`)
+        input.form-control#b-content-category-title(type='text' name='title' value=contentCategory.title)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-alias') Alias
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-category-alias(type='text' name='alias' value=`${contentCategory.alias}` readonly)
+        input.form-control#b-content-category-alias(type='text' name='alias' value=contentCategory.alias readonly)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-published') Published

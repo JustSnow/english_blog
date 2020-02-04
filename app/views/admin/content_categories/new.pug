@@ -8,7 +8,7 @@ block content
   if messages.error
     +printErrors(messages.error)
 
-  form.l-admin-page-form(action=`${adminRoutes.createContentCategoryPath()}` method='POST' enctype='multipart/form-data')
+  form.l-admin-page-form(action=adminRoutes.createContentCategoryPath() method='POST' enctype='multipart/form-data')
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label Thumbnail
       .l-admin-page-form-input-wrapper
@@ -18,6 +18,16 @@ block content
       label.col-form-label.l-admin-page-form-label(for='b-content-category-title') Title
       .l-admin-page-form-input-wrapper
         input.form-control#b-content-category-title(type='text' name='title' value=`${params.title || ''}`)
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-category-published') Published
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-content-category-published(type='checkbox' name='published' value='true' checked)
+
+    .form-group.l-admin-page-form-row
+      label.col-form-label.l-admin-page-form-label(for='b-content-category-featured') Featured
+      .l-admin-page-form-input-wrapper
+        input.form-control#b-content-category-featured(type='checkbox' name='featured' value='true' checked)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-category-short-description') Short description

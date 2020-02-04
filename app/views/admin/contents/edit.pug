@@ -16,19 +16,19 @@ block content
       label.col-form-label.l-admin-page-form-label Thumbnail
       .l-admin-page-form-input-wrapper
         if content.thumbnailPath
-          img.img-thumbnail.rounded.float-left.mb-1(src=`${imageSrcBuilder({ width: 300, height: 300, path: content.thumbnailPath })}` alt=`${content.title}`)
+          img.img-thumbnail.rounded.float-left.mb-1(src=`${imageSrcBuilder({ width: 300, height: 300, path: content.thumbnailPath })}` alt=content.title)
 
         input.form-control(type='file' name='thumbnail')
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-title') Title
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-title(type='text' name='title' value=`${content.title}`)
+        input.form-control#b-content-title(type='text' name='title' value=content.title)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-alias') Alias
       .l-admin-page-form-input-wrapper
-        input.form-control#b-content-alias(type='text' name='alias' value=`${content.alias}` readonly)
+        input.form-control#b-content-alias(type='text' name='alias' value=content.alias readonly)
 
     .form-group.l-admin-page-form-row
       label.col-form-label.l-admin-page-form-label(for='b-content-published') Published

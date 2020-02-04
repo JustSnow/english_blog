@@ -3,7 +3,7 @@ extends ../../layouts/admin
 block content
   h1 Contents
   p
-    a.btn.btn-primary(href=`${adminRoutes.newContentPath()}`) New content
+    a.btn.btn-primary(href=adminRoutes.newContentPath()) New content
 
   table.table.table-bordered.table-hover.table-sm
     thead.thead-dark
@@ -24,11 +24,11 @@ block content
             td
               .btn-group(role='group' aria-label='Content actions')
                 // use js to move button out of form for see proper styles to be applied to group of buttons
-                form(method='POST' action=`${adminRoutes.deleteContentPath(content.id)}`)
+                form(method='POST' action=adminRoutes.deleteContentPath(content.id))
                   input.btn(type='submit' name='Delete' value='Delete' onClick="return confirm('Are you sure you want to delete?')")
                   input(type='hidden' name='_method' value='DELETE')
 
-                a.btn.btn-success(href=`${adminRoutes.editContentPath(content.id)}`) Edit
+                a.btn.btn-success(href=adminRoutes.editContentPath(content.id)) Edit
       else
         tr
           td(rowspan=5) No contents

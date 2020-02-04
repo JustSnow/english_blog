@@ -3,6 +3,8 @@ import AdminRoutes from '../../routes/admin/helper'
 import createError from 'http-errors'
 import Uploader from '../../services/uploader'
 
+const { checkSchema, validationResult } = require('express-validator')
+
 // TODO refactor me add dry with General CRUD class
 class ContentsController {
   async index(req, res, next) {
@@ -103,6 +105,38 @@ class ContentsController {
   // TODO: be sure contentCategoryId was passed with params
   // required() breaks all
   permittedParams() {
+    return checkSchema({
+      title: {
+        isEmpty: false,
+        errorMessage: 'Please enter content title',
+        trim: true
+      },
+      alias: {
+        optional: true,
+        trim: true
+      },
+      description: {
+        isEmpty: false,
+        errorMessage: 'Please enter content description',
+        trim: true
+      },
+      shortDescription: {
+        isEmpty: false,
+        errorMessage: 'Please enter content short description',
+        trim: true
+      },
+      published: {
+        toBoolean: true
+      },
+      contentCategoryId: {
+        isEmpty: false,
+        errorMessage: 'Please choose content category',
+        toInt: true
+      },
+      thumbnailPath: {
+        optional: { options: { nullable: true } }
+      }
+    })
   }
 
   _getContentCategories(fields = ['id', 'title']) {

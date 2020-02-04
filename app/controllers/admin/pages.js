@@ -2,6 +2,8 @@ import db from '../../models'
 import AdminRoutes from '../../routes/admin/helper'
 import createError from 'http-errors'
 
+const { checkSchema, validationResult } = require('express-validator')
+
 // TODO refactor me add dry with General CRUD class
 class PagesController {
   async index(req, res, next) {
@@ -76,6 +78,27 @@ class PagesController {
   }
 
   permittedParams() {
+    return checkSchema({
+      title: {
+        isEmpty: false,
+        errorMessage: 'Please enter page title',
+        trim: true
+      },
+      alias: {
+        optional: true,
+        trim: true
+      },
+      description: {
+        isEmpty: false,
+        errorMessage: 'Please enter page description',
+        trim: true
+      },
+      shortDescription: {
+        isEmpty: false,
+        errorMessage: 'Please enter page short description',
+        trim: true
+      }
+    })
   }
 }
 
