@@ -1,0 +1,16 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    block title
+
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Cabin:400,700')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:900')
+    link(rel='stylesheet' href='/stylesheets/errors-page.css')
+
+  body(class=(env == 'development' ? 'development' : ''))
+    block content
+
+  if env == 'development'
+    pre= error.stack

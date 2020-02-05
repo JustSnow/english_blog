@@ -1,0 +1,17 @@
+extends ../layouts/error
+
+block title
+  title 500 Internal server error
+
+block content
+  #notfound
+    .notfound
+      .notfound-404
+        h3 500 Internal server error
+        h1
+          span 5
+          span 0
+          span 0
+
+      h2 Internal error. Try again latter
+      a.b-error-page-go-home(href='/') Go to home page

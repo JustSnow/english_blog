@@ -1,0 +1,75 @@
+*
+  box-sizing: border-box
+
+body
+  padding: 0
+  margin: 0
+  &.development
+    #notfound
+      height: 300px
+
+#notfound
+  position: relative
+  height: 100vh
+
+  .notfound
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+
+.b-error-page-go-home
+  position: relative
+
+.notfound
+  max-width: 520px
+  width: 100%
+  line-height: 1.4
+  text-align: center
+
+  h2
+    font-family: 'Cabin', sans-serif
+    font-size: 20px
+    font-weight: 400
+    text-transform: uppercase
+    color: #000
+    margin-top: 0px
+    margin-bottom: 25px
+
+  .notfound-404
+    position: relative
+    height: 240px
+    @media only screen and (max-width: 767px)
+      height: 200px
+
+    h1
+      font-family: 'Montserrat', sans-serif
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      font-size: 252px
+      font-weight: 900
+      margin: 0px
+      color: #262626
+      text-transform: uppercase
+      letter-spacing: -40px
+      margin-left: -20px
+
+      @media only screen and (max-width: 767px)
+        height: 200px
+
+      & > span
+        text-shadow: -8px 0px 0px #fff
+
+  @media only screen and (max-width: 480px)
+    .notfound-404
+      height: 162px
+
+      h1
+        font-size: 162px
+        height: 150px
+        line-height: 162px
+
+    h2
+      font-size: 16px

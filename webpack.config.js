@@ -8,7 +8,8 @@ module.exports = {
   entry: {
     app: './app/assets/javascripts/app.js',
     admin: './app/assets/javascripts/admin.js',
-    admin_authentification: './app/assets/javascripts/admin_authentification.js'
+    admin_authentification: './app/assets/javascripts/admin_authentification.js',
+    'errors-page': './app/assets/javascripts/errors-page.js'
   },
   output: {
     path: path.join(__dirname, 'public'),
