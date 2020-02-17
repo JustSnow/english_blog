@@ -8,6 +8,7 @@
     "assets-watch": "webpack --watch --progress --color",
     "seeds": "sequelize-cli db:seed:all",
     "setup-db": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
+    "clean-logs": "rm logs/*",
     "clean-assets": "rm -rf public/javascripts/* public/stylesheets/*"
   },
   "dependencies": {

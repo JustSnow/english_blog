@@ -9,6 +9,9 @@ module.exports = {
     autorestart: true,
     watch: true,
     max_memory_restart: '1G',
+    time: true,
+    error_file: './logs/error.log',
+    out_file: './logs/blog.log',
     env: {
       NODE_ENV: 'development'
     },
