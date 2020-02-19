@@ -4,7 +4,7 @@ import path from 'path'
 import logger from 'morgan'
 import methodOverride from 'method-override'
 import morganBody from 'morgan-body'
-import initPassportConfig from './config/passport'
+import PassportConfig from './config/passport'
 
 const app = express()
 const helmet = require('helmet')
@@ -21,7 +21,7 @@ import applyAdminVariables from './app/presenters/admin'
 import applyLayoutVariables from './app/presenters/layout'
 
 const passport = require('passport')
-initPassportConfig(passport)
+PassportConfig.init(passport)
 
 app.use(helmet())
 app.use(helmet.contentSecurityPolicy({
