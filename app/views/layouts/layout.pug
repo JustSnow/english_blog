@@ -43,7 +43,7 @@ html(lang='en')
 
     footer.bg-light
       section.l-footer-section
-        .b-copyright.float-left
+        .b-copyright
           p.
             Powered by
             #[a(href='https://github.com/JustSnow', alt='JustSnow') JustSnow ]
@@ -52,11 +52,11 @@ html(lang='en')
         if contentCategories
           if contentCategories.length == 1
             - const contentCategory = contentCategories[0]
-            .float-right.l-content-category-item
+            .l-content-category-item
               a(href=`${ layoutRoutes.contentCategoryPath(contentCategory.alias) }`)= contentCategory.title
 
           else
-            .float-right.l-content-category-items
+            .l-content-category-items
               a.nav-link.dropdown-toggle#l-page-information-categories-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Information categories
               .dropdown-menu(aria-labelledby='l-page-information-categories-dropdown')
                 each contentCategory in contentCategories
