@@ -60,6 +60,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       featured: {
         where: { featured: true }
+      },
+      notFeatured: {
+        where: { featured: false }
       }
     },
     hooks: {

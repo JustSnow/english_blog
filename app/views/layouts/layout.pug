@@ -19,12 +19,17 @@ html(lang='en')
               li.nav-item.active(data-path='about')
                 a.nav-link(href='/about') About
 
-              if contentCategories
-                li.nav-item.dropdown(data-path='content-categories')
-                  a.nav-link.dropdown-toggle#l-page-contents-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Content categories
-                  .dropdown-menu(aria-labelledby='l-page-contents-dropdown')
-                    each contentCategory in contentCategories
-                      a.dropdown-item(href=`${layoutRoutes.contentCategoryPath(contentCategory.alias)}`)= contentCategory.title
+              if featuredContentCategories
+                if featuredContentCategories.length == 1
+                  - const contentCategory = featuredContentCategories[0]
+                  li.nav-item(data-path=`${ layoutRoutes.contentCategoryPath(contentCategory.alias) }`)
+                    a.nav-link(href=`${ layoutRoutes.contentCategoryPath(contentCategory.alias) }`)= contentCategory.title
+                else
+                  li.nav-item.dropdown(data-path='content-categories')
+                    a.nav-link.dropdown-toggle#l-page-contents-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Content categories
+                    .dropdown-menu(aria-labelledby='l-page-contents-dropdown')
+                      each contentCategory in featuredContentCategories
+                        a.dropdown-item(href=`${ layoutRoutes.contentCategoryPath(contentCategory.alias) }`)= contentCategory.title
 
               li.nav-item(data-path='policy-and-privacy')
                 a.nav-link(href='/policy-and-privacy') Policy and Privacy
@@ -38,11 +43,24 @@ html(lang='en')
 
     footer.bg-light
       section.l-footer-section
-        .b-copyright
+        .b-copyright.float-left
           p.
             Powered by
             #[a(href='https://github.com/JustSnow', alt='JustSnow') JustSnow ]
             since 2019
+
+        if contentCategories
+          if contentCategories.length == 1
+            - const contentCategory = contentCategories[0]
+            .float-right.l-content-category-item
+              a(href=`${ layoutRoutes.contentCategoryPath(contentCategory.alias) }`)= contentCategory.title
+
+          else
+            .float-right.l-content-category-items
+              a.nav-link.dropdown-toggle#l-page-information-categories-dropdown(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Information categories
+              .dropdown-menu(aria-labelledby='l-page-information-categories-dropdown')
+                each contentCategory in contentCategories
+                  a.dropdown-item(href=`${ layoutRoutes.contentCategoryPath(contentCategory.alias) }`)= contentCategory.title
 
   script(src='/javascripts/vendors~admin~app.js')
   script(src='/javascripts/app.js')
