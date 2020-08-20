@@ -12,7 +12,7 @@
     "clean-assets": "rm -rf public/javascripts/* public/stylesheets/*"
   },
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "connect-pg-simple": "^6.0.1",
     "debug": "4.1.1",
     "depcheck": "^0.9.1",
